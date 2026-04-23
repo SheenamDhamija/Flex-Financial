@@ -47,11 +47,13 @@ body{font-family:var(--f);background:var(--bg);color:var(--ink);line-height:1.5;
 .psw-btn[data-p="int"] .dot{background:var(--gold)}
 .psw-btn[data-p="ext"] .dot{background:var(--green)}
 .psw-btn[data-p="dlr"] .dot{background:var(--teal-light)}
+.psw-btn[data-p="lease"] .dot{background:#8B5CF6}
 .psw-btn:hover{color:rgba(255,255,255,.6)}
 .psw-btn.on{color:#fff}
 .psw-btn[data-p="int"].on{background:rgba(201,149,45,.2);box-shadow:inset 0 0 0 1px rgba(201,149,45,.3)}
 .psw-btn[data-p="ext"].on{background:rgba(10,123,90,.2);box-shadow:inset 0 0 0 1px rgba(10,123,90,.3)}
 .psw-btn[data-p="dlr"].on{background:rgba(58,122,138,.2);box-shadow:inset 0 0 0 1px rgba(58,122,138,.3)}
+.psw-btn[data-p="lease"].on{background:rgba(139,92,246,.2);box-shadow:inset 0 0 0 1px rgba(139,92,246,.3)}
 .psw-btn.on .dot{background:#fff}
 
 /* ═══ LAYOUT ═══ */
@@ -142,6 +144,43 @@ input[type=number]{-moz-appearance:textfield}
 .ss-item{display:flex;align-items:center;gap:4px;color:var(--gold-dim)}
 .ss-item .ss-l{font-weight:500;color:var(--ink4);font-size:10px}
 .ss-item .ss-v{font-family:var(--m);font-weight:700;font-size:11px}
+
+/* ═══ LOAN vs LEASE COMPARISON ═══ */
+.llc-head{text-align:center;margin-bottom:18px}
+.llc-head h3{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
+.llc-head p{font-size:11px;color:var(--ink4);margin-top:2px}
+.llc-tax-row{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.llc-tax-label{font-size:11px;font-weight:600;color:var(--ink3)}
+.llc-tax-input{width:70px;padding:6px 8px;border:1.5px solid var(--bd);border-radius:var(--rx);font-family:var(--m);font-size:13px;font-weight:600;color:var(--ink);text-align:right;outline:none}
+.llc-tax-input:focus{border-color:var(--teal-light)}
+.llc-tax-suf{font-size:11px;color:var(--ink4);font-weight:500}
+
+.llc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:640px){.llc-grid{grid-template-columns:1fr;gap:10px}}
+.llc-card{border-radius:var(--rs);border:1.5px solid var(--bd);overflow:hidden}
+.llc-card.loan{border-color:var(--teal-border)}
+.llc-card.lease{border-color:var(--gold-border)}
+.llc-card-top{padding:10px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;text-align:center}
+.llc-card.loan .llc-card-top{background:var(--teal-bg);color:var(--teal)}
+.llc-card.lease .llc-card-top{background:var(--gold-bg);color:var(--gold-dim)}
+.llc-row{display:flex;justify-content:space-between;padding:7px 14px;border-bottom:1px solid var(--sf3);font-size:12px}
+.llc-row:last-child{border-bottom:none}
+.llc-row .ll{color:var(--ink3);font-weight:500}
+.llc-row .lv{font-family:var(--m);font-weight:600;color:var(--ink);font-size:11px}
+.llc-row.highlight{background:var(--green-bg)}
+.llc-row.highlight .ll{color:var(--green);font-weight:700}
+.llc-row.highlight .lv{color:var(--green);font-weight:700}
+.llc-row.dim .lv{color:var(--ink4)}
+
+.llc-savings{background:linear-gradient(135deg,var(--green-bg),#d1fae5);border:1.5px solid var(--green-bd);border-radius:var(--rs);padding:16px;text-align:center;margin-bottom:16px}
+.llc-savings .sav-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--green);margin-bottom:4px}
+.llc-savings .sav-amount{font-family:var(--m);font-size:24px;font-weight:800;color:var(--green);letter-spacing:-.5px}
+.llc-savings .sav-sub{font-size:11px;color:var(--ink3);margin-top:4px}
+
+.llc-points{margin-top:14px;padding:12px 14px;background:var(--sf2);border-radius:var(--rs);border:1px solid var(--bd)}
+.llc-points .lp-title{font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.llc-points .lp-item{font-size:12px;color:var(--ink2);padding:4px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.llc-points .lp-item::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
 
 /* ═══ TABS ═══ */
 .tabs{display:flex;border-bottom:1px solid var(--bd);padding:0 16px;background:var(--sf2);overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -281,6 +320,11 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .ip{font-size:13px;left:12px}
   .is{font-size:10px;right:12px}
   .fh{font-size:9px}
+  /* Lease inputs stack on mobile */
+  #pg-lease [style*="grid-template-columns: 1fr 1fr 1fr"],
+  #pg-lease [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+  #pg-lease [style*="grid-template-columns: 1fr 1fr"],
+  #pg-lease [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
   .hr{margin:10px 0}
 
   /* ── Advance input ── */
@@ -428,6 +472,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   <div class="psw" id="pageSw">
     <button class="psw-btn on" data-p="int" onclick="setPage('int')"><span class="dot"></span>Internal</button>
     <button class="psw-btn" data-p="ext" onclick="setPage('ext')"><span class="dot"></span>Customer</button>
+    <button class="psw-btn" data-p="lease" onclick="setPage('lease')"><span class="dot"></span>Lease</button>
     <button class="psw-btn" data-p="dlr" onclick="setPage('dlr')"><span class="dot"></span>Dealer</button>
   </div>
   <div class="hdr-right">
@@ -518,14 +563,54 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
       <div class="tabs">
         <button class="tb on" onclick="oTab('cmp',this)">All Tenures</button>
         <button class="tb" onclick="oTab('sch',this)">Schedule</button>
+        <button class="tb" onclick="oTab('llc',this)">Loan vs Lease</button>
         <button class="tb" onclick="oTab('pv',this)">Quote</button>
         <button class="tb" onclick="oTab('doc',this)">Documents</button>
       </div>
       <div class="tpn on" id="t-cmp"><div class="ct-wrap"><table class="ct" id="cmpT"></table></div></div>
       <div class="tpn" id="t-sch"><div style="max-height:500px;overflow-y:auto"><table class="st" id="schT"></table></div></div>
+      <div class="tpn" id="t-llc"><div class="cd-b" id="llcContent"></div></div>
       <div class="tpn" id="t-pv"><div class="cd-b"><div class="pw" id="pvW"></div><div style="margin-top:14px" class="btng"><button class="btn btn-b" onclick="printQuote()">📄 Save / Print Quote</button></div></div></div>
       <div class="tpn" id="t-doc"><div class="cd-b"><div class="doc-section" style="margin-top:0;border-top:none;padding-top:0"><div class="doc-hdr"><div class="doc-title">Required Documents</div><span class="doc-qual" id="docQual"></span></div><div class="doc-entity-sel"><select id="docEntity" onchange="renderDocs()"><option value="individual">Individual / Proprietorship</option><option value="partnership">Partnership Firm</option><option value="pvtltd">Pvt Ltd / LLP</option></select></div><ul class="doc-list" id="docList"></ul><div class="doc-note" id="docNote"></div></div></div></div>
     </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ PAGE: LEASE ═══ -->
+<div class="page" id="pg-lease">
+<div style="max-width:960px;margin:0 auto;padding:24px 16px">
+  <div class="dlr-hero">
+    <h2>Lease / Rental Model</h2>
+    <p>Operating lease with full rental deductibility — powered by PTPM rental factors</p>
+  </div>
+
+  <!-- Lease Input Card -->
+  <div class="cd" style="margin-bottom:20px">
+    <div class="cd-h"><div class="cd-i" style="background:#f3e8ff;color:#8B5CF6">📋</div><h2>Lease Configuration</h2></div>
+    <div class="cd-b">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <div class="fg"><label class="fl">Equipment Value (Base)</label><div class="iw"><span class="ip">₹</span><input type="text" id="leaseInv" class="fi hp" value="10000000" inputmode="numeric" onchange="calcLease()"></div><div class="fh" id="leaseInvH"></div></div>
+        <div class="fg"><label class="fl">GST Rate</label><div class="iw"><input type="number" id="leaseGST" class="fi hs" value="5" step="1" onchange="calcLease()"><span class="is">%</span></div></div>
+        <div class="fg"><label class="fl">Advance Rental</label><div class="iw"><input type="number" id="leaseAdv" class="fi hs" value="20" step="5" onchange="calcLease()"><span class="is">%</span></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div class="fg"><label class="fl">Corporate Tax Rate</label><div class="iw"><input type="number" id="leaseTax" class="fi hs" value="25.17" step="0.01" onchange="calcLease()"><span class="is">%</span></div></div>
+        <div class="fg"><label class="fl">Advance (₹)</label><div class="fh" id="leaseAdvAmt" style="font-size:14px;font-weight:700;color:var(--ink);margin-top:8px">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lease All Tenures Table -->
+  <div class="cd" style="margin-bottom:20px">
+    <div class="cd-h"><div class="cd-i" style="background:#f3e8ff;color:#8B5CF6">📊</div><h2>Lease Rental — All Tenures</h2></div>
+    <div style="padding:0;overflow-x:auto"><table class="ct" id="leaseTbl"></table></div>
+  </div>
+
+  <!-- Loan vs Lease Comparison -->
+  <div class="cd">
+    <div class="cd-h"><div class="cd-i" style="background:var(--green-bg);color:var(--green)">⚖</div><h2>Loan vs Lease — Post-Tax Comparison</h2></div>
+    <div class="cd-b" id="loanVsLeaseContent"></div>
   </div>
 </div>
 </div>
@@ -638,7 +723,7 @@ const C={
   isDoctorLoan(fin){return fin<=CFG.doctorLoanLimit}
 };
 
-const S={prog:'subv',tenure:CFG.defTenure,inv:3350000,advPct:20,budget:6.5,curPage:'int',advMode:'abs',customValid:null};
+const S={prog:'subv',tenure:CFG.defTenure,inv:3350000,advPct:20,budget:6.5,curPage:'int',advMode:'abs',customValid:null,taxRate:0.2517};
 
 function fI(n){if(n==null||isNaN(n))return'–';const x=Math.round(n),ng=x<0,s=Math.abs(x).toString();if(s.length<=3)return(ng?'−':'')+'₹'+s;return(ng?'−':'')+'₹'+s.slice(0,-3).replace(/\B(?=(\d{2})+(?!\d))/g,',')+','+s.slice(-3)}
 function fN(n){return fI(n).replace(/₹/,'')}
@@ -660,7 +745,9 @@ function setPage(p){
   document.querySelectorAll('.psw-btn').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
   document.body.classList.toggle('ext',p==='ext');
   document.getElementById('pg-calc').classList.toggle('on',p==='int'||p==='ext');
+  document.getElementById('pg-lease').classList.toggle('on',p==='lease');
   document.getElementById('pg-dlr').classList.toggle('on',p==='dlr');
+  if(p==='lease')calcLease();
 }
 
 /* ── Advance Mode Toggle (₹ vs %) ── */
@@ -733,7 +820,7 @@ function calc(){
   document.getElementById('subvStrip').style.display=showSubv?'':'none';
   document.getElementById('budgBox').style.display=showSubv?'':'none';
   if(showSubv){document.getElementById('sSubvP').textContent=fP(r.actualSubv);document.getElementById('sSubvA').textContent=fI(r.subvAmt)}
-  renderTierGrid();renderCmp();renderSch(r);renderPv(r);renderDocs();
+  renderTierGrid();renderCmp();renderSch(r);renderLLC(r);renderPv(r);renderDocs();
 }
 
 /* ── Tier Selector ── */
@@ -780,6 +867,112 @@ function setZeroEMI(){
     // 0% not achievable within 9% cap — pick max (9%)
     setBudget(9);
   }
+}
+
+/* ── Loan vs Lease Comparison ── */
+function renderLLC(r){
+  const el=document.getElementById('llcContent');
+  const taxRate=S.taxRate||0.2517;
+  const totalRental=r.emi*r.tenure;
+  const totalOutflow=totalRental+r.adv;
+
+  // LOAN post-tax
+  const loanDeductible=r.custInt; // Only interest is deductible
+  const loanTaxSaving=Math.max(0,loanDeductible)*taxRate;
+  const loanPostTax=totalOutflow-loanTaxSaving;
+  const loanEffMonthly=loanPostTax/r.tenure;
+
+  // LEASE post-tax (same monthly payment, but 100% rental is deductible)
+  const leaseDeductible=totalRental; // Full rental
+  const leaseTaxSaving=leaseDeductible*taxRate;
+  const leasePostTax=totalOutflow-leaseTaxSaving;
+  const leaseEffMonthly=leasePostTax/r.tenure;
+
+  // Savings
+  const savings=loanPostTax-leasePostTax;
+  const savPct=(savings/r.inv*100).toFixed(1);
+
+  // Post-tax IRR (approximate using monthly cash flows)
+  // Loan: receives fin, pays EMI*(1 - taxRate*interestFraction) each month
+  // Lease: receives fin, pays Rental*(1-taxRate) each month
+  const leaseMonthlyPostTax=r.emi*(1-taxRate);
+  const loanMonthlyPostTax=r.emi-(r.custInt/r.tenure)*taxRate;
+  // IRR ≈ rate where PV of monthly payments = finance amount
+  function approxIRR(monthlyPay,n,pv){
+    // Newton's method to find monthly rate
+    let rm=0.005;
+    for(let iter=0;iter<100;iter++){
+      let f=0,fp=0;
+      for(let t=1;t<=n;t++){
+        const d=Math.pow(1+rm,t);
+        f+=monthlyPay/d;
+        fp-=t*monthlyPay/Math.pow(1+rm,t+1);
+      }
+      f-=pv;
+      const step=f/fp;
+      rm=rm-step;
+      if(Math.abs(step)<1e-10)break;
+    }
+    return rm*12*100; // annualized %
+  }
+  const loanIRR=r.fin>0?approxIRR(loanMonthlyPostTax,r.tenure,r.fin):0;
+  const leaseIRR=r.fin>0?approxIRR(leaseMonthlyPostTax,r.tenure,r.fin):0;
+
+  el.innerHTML=`
+    <div class="llc-head">
+      <h3>Loan vs Lease Comparison</h3>
+      <p>Same monthly outflow — different post-tax economics</p>
+    </div>
+    <div class="llc-tax-row">
+      <span class="llc-tax-label">Corporate Tax Rate:</span>
+      <input type="number" class="llc-tax-input" id="llcTaxInput" value="${(taxRate*100).toFixed(2)}" step="0.01" min="0" max="40" onchange="S.taxRate=parseFloat(this.value)/100;calc()">
+      <span class="llc-tax-suf">% (editable)</span>
+    </div>
+
+    <div class="llc-grid">
+      <div class="llc-card loan">
+        <div class="llc-card-top">Loan (EMI)</div>
+        <div class="llc-row"><span class="ll">Equipment Value</span><span class="lv">${fI(r.inv)}</span></div>
+        <div class="llc-row"><span class="ll">Advance Payment</span><span class="lv">${fI(r.adv)}</span></div>
+        <div class="llc-row"><span class="ll">Monthly EMI</span><span class="lv">${fI(r.emi)}</span></div>
+        <div class="llc-row"><span class="ll">Tenure</span><span class="lv">${r.tenure} months</span></div>
+        <div class="llc-row"><span class="ll">Total Outflow</span><span class="lv">${fI(totalOutflow)}</span></div>
+        <div class="llc-row dim"><span class="ll">Tax-Deductible</span><span class="lv">Interest only: ${fI(r.custInt)}</span></div>
+        <div class="llc-row dim"><span class="ll">Tax Savings</span><span class="lv">${fI(loanTaxSaving)}</span></div>
+        <div class="llc-row highlight"><span class="ll">Post-Tax Cost</span><span class="lv">${fI(loanPostTax)}</span></div>
+        <div class="llc-row"><span class="ll">Eff. Monthly Cost</span><span class="lv">${fI(loanEffMonthly)}</span></div>
+        <div class="llc-row"><span class="ll">Post-Tax IRR</span><span class="lv">${loanIRR>0?loanIRR.toFixed(2)+'%':'—'}</span></div>
+      </div>
+      <div class="llc-card lease">
+        <div class="llc-card-top">Lease (Rental)</div>
+        <div class="llc-row"><span class="ll">Equipment Value</span><span class="lv">${fI(r.inv)}</span></div>
+        <div class="llc-row"><span class="ll">Security Deposit</span><span class="lv">${fI(r.adv)}</span></div>
+        <div class="llc-row"><span class="ll">Monthly Rental</span><span class="lv">${fI(r.emi)}</span></div>
+        <div class="llc-row"><span class="ll">Tenure</span><span class="lv">${r.tenure} months</span></div>
+        <div class="llc-row"><span class="ll">Total Outflow</span><span class="lv">${fI(totalOutflow)}</span></div>
+        <div class="llc-row dim"><span class="ll">Tax-Deductible</span><span class="lv">Full rental: ${fI(leaseDeductible)}</span></div>
+        <div class="llc-row dim"><span class="ll">Tax Savings</span><span class="lv">${fI(leaseTaxSaving)}</span></div>
+        <div class="llc-row highlight"><span class="ll">Post-Tax Cost</span><span class="lv">${fI(leasePostTax)}</span></div>
+        <div class="llc-row"><span class="ll">Eff. Monthly Cost</span><span class="lv">${fI(leaseEffMonthly)}</span></div>
+        <div class="llc-row"><span class="ll">Post-Tax IRR</span><span class="lv">${leaseIRR>0?leaseIRR.toFixed(2)+'%':'—'}</span></div>
+      </div>
+    </div>
+
+    <div class="llc-savings">
+      <div class="sav-label">Post-Tax Savings with Lease</div>
+      <div class="sav-amount">${fI(savings)}</div>
+      <div class="sav-sub">${savPct}% of equipment value over ${r.tenure} months</div>
+    </div>
+
+    <div class="llc-points">
+      <div class="lp-title">Why Lease Works Better Post-Tax</div>
+      <div class="lp-item">100% of lease rental is a deductible business expense under Section 37(1)</div>
+      <div class="lp-item">In a loan, only the interest component is deductible — principal repayment is not</div>
+      <div class="lp-item">Post-tax effective monthly cost is ₹${Math.round(loanEffMonthly-leaseEffMonthly).toLocaleString('en-IN')} lower per month with lease</div>
+      <div class="lp-item">Equipment stays off the hospital's balance sheet (operating lease treatment)</div>
+      <div class="lp-item">No depreciation tracking required — rental expense is straightforward</div>
+    </div>
+  `;
 }
 
 function renderCmp(){
@@ -874,7 +1067,7 @@ function oTab(id,btn){
 }
 
 function printQuote(){
-  oTab('pv',document.querySelectorAll('.tb')[2]);
+  oTab('pv',document.querySelectorAll('.tb')[3]);
   const quoteHTML=document.getElementById('pvW').innerHTML;
   const w=window.open('','_blank','width=800,height=1000');
   if(!w){alert('Please allow popups for this site, then try again.');return;}
@@ -916,6 +1109,146 @@ window.onload=function(){
 };
 <\/script></body></html>`);
   w.document.close();
+}
+
+/* ═══ LEASE CALCULATOR ═══ */
+const PTPM={12:70.25, 24:37.25, 36:26.30, 48:20.80, 60:17.60};
+
+function calcLease(){
+  const invRaw=document.getElementById('leaseInv').value.replace(/[^0-9]/g,'');
+  const baseAsset=parseFloat(invRaw)||0;
+  const gstPct=parseFloat(document.getElementById('leaseGST').value)||5;
+  const advPct=parseFloat(document.getElementById('leaseAdv').value)||20;
+  const taxRate=(parseFloat(document.getElementById('leaseTax').value)||25.17)/100;
+  
+  const gstAmt=baseAsset*gstPct/100;
+  const totalAsset=baseAsset+gstAmt;
+  const advance=totalAsset*advPct/100;
+  
+  document.getElementById('leaseInvH').textContent=baseAsset>0?fI(baseAsset):'';
+  document.getElementById('leaseAdvAmt').textContent=fI(advance);
+  
+  // Build lease table
+  const tenures=[12,24,36,48,60];
+  let h=`<thead><tr><th style="text-align:left">Lease Details</th>`;
+  tenures.forEach(t=>h+=`<th>${t}M</th>`);
+  h+=`</tr></thead><tbody>`;
+  
+  const leaseData={};
+  tenures.forEach(t=>{
+    const ptpm=PTPM[t]||0;
+    const rental=ptpm*baseAsset/1000;
+    const rentalGST=rental*gstPct/100;
+    const totalRental=rental+rentalGST;
+    const totalOutflow=totalRental*t;
+    const tco=advance+totalOutflow;
+    const postTax=tco*(1-taxRate);
+    leaseData[t]={ptpm,rental,rentalGST,totalRental,totalOutflow,tco,postTax};
+  });
+  
+  const rows=[
+    ['Asset Cost (Base)',t=>fI(baseAsset)],
+    ['GST @'+gstPct+'%',t=>fI(gstAmt)],
+    ['Total Asset Cost',t=>fI(totalAsset)],
+    ['Advance @'+advPct+'%',t=>fI(advance)],
+    ['PTPM Factor',t=>leaseData[t].ptpm.toFixed(2)],
+    ['Monthly Rental',t=>fI(leaseData[t].rental),'re'],
+    ['GST on Rental',t=>fI(leaseData[t].rentalGST)],
+    ['Total Rental/Month',t=>fI(leaseData[t].totalRental)],
+    ['Total Rental Outflow',t=>fI(leaseData[t].totalOutflow)],
+    ['Total Cost of Ownership',t=>fI(leaseData[t].tco)],
+    ['Post-Tax Cost @'+((taxRate*100).toFixed(2))+'%',t=>fI(leaseData[t].postTax),'re'],
+  ];
+  
+  rows.forEach(([label,fn,cls])=>{
+    h+=`<tr class="${cls||''}"><td>${label}</td>`;
+    tenures.forEach(t=>h+=`<td>${fn(t)}</td>`);
+    h+=`</tr>`;
+  });
+  h+=`</tbody>`;
+  document.getElementById('leaseTbl').innerHTML=h;
+  
+  // Loan vs Lease comparison (use 24M as reference or selected tenure from main calc)
+  const cmpEl=document.getElementById('loanVsLeaseContent');
+  const compTenures=[12,24,36,60];
+  
+  let ch=`<div class="llc-head"><h3>Post-Tax: Loan vs Lease</h3><p>Same equipment — which financing structure costs less after tax?</p></div>`;
+  
+  ch+=`<div class="ct-wrap"><table class="ct"><thead><tr><th style="text-align:left">Metric</th>`;
+  compTenures.forEach(t=>ch+=`<th>${t}M</th>`);
+  ch+=`</tr></thead><tbody>`;
+  
+  // For loan, use the same invoice value with current subvention from main calculator
+  // Loan: invoice = totalAsset (same as lease total), advance same %
+  const loanInv=totalAsset;
+  const loanAdv=advance;
+  const loanFin=loanInv-loanAdv;
+  
+  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LEASE (Operating Rental)</td></tr>`;
+  ch+=`<tr><td>Monthly Rental (inc GST)</td>`;
+  compTenures.forEach(t=>ch+=`<td>${fI(leaseData[t]?leaseData[t].totalRental:0)}</td>`);
+  ch+=`</tr><tr><td>Total Cost of Ownership</td>`;
+  compTenures.forEach(t=>ch+=`<td>${fI(leaseData[t]?leaseData[t].tco:0)}</td>`);
+  ch+=`</tr><tr class="re"><td>Post-Tax Cost (Lease)</td>`;
+  compTenures.forEach(t=>ch+=`<td>${fI(leaseData[t]?leaseData[t].postTax:0)}</td>`);
+  ch+=`</tr>`;
+  
+  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LOAN (EMI — No Subvention)</td></tr>`;
+  // Loan with 0% subvention (customer bears full interest)
+  ch+=`<tr><td>Monthly EMI</td>`;
+  compTenures.forEach(t=>{
+    const custRate=C.getCustRate(t,0);
+    const emi=C.pmt(custRate,t,loanFin);
+    ch+=`<td>${fI(emi)}</td>`;
+  });
+  ch+=`</tr><tr><td>Total Outflow (EMI+Adv)</td>`;
+  compTenures.forEach(t=>{
+    const custRate=C.getCustRate(t,0);
+    const emi=C.pmt(custRate,t,loanFin);
+    ch+=`<td>${fI(emi*t+loanAdv)}</td>`;
+  });
+  ch+=`</tr><tr><td>Interest (Tax-Deductible)</td>`;
+  compTenures.forEach(t=>{
+    const custRate=C.getCustRate(t,0);
+    const emi=C.pmt(custRate,t,loanFin);
+    const interest=(emi*t)-loanFin;
+    ch+=`<td>${fI(interest)}</td>`;
+  });
+  ch+=`</tr><tr class="re"><td>Post-Tax Cost (Loan)</td>`;
+  compTenures.forEach(t=>{
+    const custRate=C.getCustRate(t,0);
+    const emi=C.pmt(custRate,t,loanFin);
+    const interest=(emi*t)-loanFin;
+    const total=emi*t+loanAdv;
+    const postTax=total-(interest*taxRate);
+    ch+=`<td>${fI(postTax)}</td>`;
+  });
+  ch+=`</tr>`;
+  
+  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px;color:var(--green)">▾ LEASE ADVANTAGE</td></tr>`;
+  ch+=`<tr class="ss"><td>Post-Tax Savings with Lease</td>`;
+  compTenures.forEach(t=>{
+    const custRate=C.getCustRate(t,0);
+    const emi=C.pmt(custRate,t,loanFin);
+    const interest=(emi*t)-loanFin;
+    const loanTotal=emi*t+loanAdv;
+    const loanPT=loanTotal-(interest*taxRate);
+    const leasePT=leaseData[t]?leaseData[t].postTax:0;
+    const saving=loanPT-leasePT;
+    ch+=`<td style="color:var(--green);font-weight:700">${saving>0?fI(saving):'—'}</td>`;
+  });
+  ch+=`</tr></tbody></table></div>`;
+  
+  ch+=`<div class="llc-points" style="margin-top:16px">
+    <div class="lp-title">Why Lease is Better Post-Tax</div>
+    <div class="lp-item">100% of lease rental (including advance) is a deductible business expense</div>
+    <div class="lp-item">In a loan, only the interest component is deductible — principal repayment is not</div>
+    <div class="lp-item">Lease keeps the equipment off the hospital's balance sheet</div>
+    <div class="lp-item">No depreciation tracking — rental expense is a straightforward P&L deduction</div>
+    <div class="lp-item">At ${(taxRate*100).toFixed(2)}% corporate tax, every ₹1 of rental saves ₹${(taxRate).toFixed(2)} in tax</div>
+  </div>`;
+  
+  cmpEl.innerHTML=ch;
 }
 
 document.addEventListener('DOMContentLoaded',function(){
