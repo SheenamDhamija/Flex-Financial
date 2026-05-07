@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Flex Financial — Stryker India</title>
+<title>Flex Financial – Stryker India</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <noscript><style>.page,.hdr{display:block!important}.rcol{display:block!important}</style></noscript>
@@ -259,7 +259,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 
 /* ═══ DEALER ═══ */
 .dlr-hero{text-align:center;margin-bottom:28px;padding:8px 0}
-.dlr-hero h2{font-family:var(--fd);font-size:28px;font-weight:600;letter-spacing:.3px;color:var(--ink);margin-bottom:4px}
+.dlr-hero h2{font-family:var(--f);font-size:24px;font-weight:700;letter-spacing:-.4px;color:var(--ink);margin-bottom:4px}
 .dlr-hero p{font-size:13px;color:var(--ink3);font-weight:400}
 .dlr-card{background:var(--sf);border-radius:var(--r);border:1px solid var(--bd);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow-2)}
 .dlr-card-h{padding:18px 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--bd)}
@@ -299,7 +299,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .hdr-logo{height:22px}
   .stryker-text{font-size:10px;letter-spacing:1.5px}
   .psw{padding:2px;gap:1px;border-radius:6px}
-  .psw-btn{padding:4px 8px;font-size:9px;gap:3px;border-radius:5px;letter-spacing:0}
+  .psw-btn{padding:4px 7px;font-size:9px;gap:3px;border-radius:5px;letter-spacing:0}
   .psw-btn .dot{width:5px;height:5px}
 
   /* ── Layout & Cards ── */
@@ -321,10 +321,36 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .is{font-size:10px;right:12px}
   .fh{font-size:9px}
   /* Lease inputs stack on mobile */
-  #pg-lease [style*="grid-template-columns: 1fr 1fr 1fr"],
-  #pg-lease [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
-  #pg-lease [style*="grid-template-columns: 1fr 1fr"],
-  #pg-lease [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #pg-lease [style*="grid-template-columns"]{grid-template-columns:1fr!important;gap:10px!important}
+  #pg-lease .dlr-hero{margin-bottom:16px}
+  #pg-lease .dlr-hero h2{font-size:18px}
+  #pg-lease .dlr-hero p{font-size:11px}
+  /* Lease deposit summary row */
+  #pg-lease .cd-b > div[style*="background:var(--sf2)"]{font-size:10px!important;padding:8px 10px!important}
+  /* Lease label adjustments */
+  #pg-lease .fl{font-size:9px;line-height:1.3}
+  /* Page wrapper padding */
+  #pg-lease > div{padding:14px 12px!important}
+  #pg-dlr > div{padding:14px 12px!important}
+  
+  /* LLC (Loan vs Lease) card mobile */
+  .llc-head h3{font-size:14px}
+  .llc-head p{font-size:10px;line-height:1.3;padding:0 4px}
+  .llc-tax-row{flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .llc-tax-label{font-size:10px}
+  .llc-tax-input{width:64px;padding:5px 6px;font-size:12px}
+  .llc-tax-suf{font-size:10px}
+  .llc-card-top{padding:8px 10px;font-size:10px}
+  .llc-row{padding:6px 10px;font-size:11px;gap:6px}
+  .llc-row .ll{font-size:10px;line-height:1.3}
+  .llc-row .lv{font-size:10px;line-height:1.3;text-align:right}
+  .llc-savings{padding:14px 12px;margin-bottom:14px}
+  .llc-savings .sav-label{font-size:9px}
+  .llc-savings .sav-amount{font-size:20px}
+  .llc-savings .sav-sub{font-size:10px;line-height:1.4}
+  .llc-points{padding:10px 12px}
+  .llc-points .lp-title{font-size:9px;margin-bottom:6px}
+  .llc-points .lp-item{font-size:10px;padding:3px 0;line-height:1.4}
   .hr{margin:10px 0}
 
   /* ── Advance input ── */
@@ -336,7 +362,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .pb{padding:10px 4px;font-size:10px;line-height:1.2}
   .pb small{font-size:8px}
 
-  /* ── Tenure pills — 2 rows on narrow screens ── */
+  /* ── Tenure pills – 2 rows on narrow screens ── */
   .trow{gap:4px}
   .tp{padding:8px 0;font-size:12px;min-width:40px;border-radius:var(--rx)}
 
@@ -373,7 +399,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .tabs{padding:0 8px;gap:0}
   .tb{padding:10px 10px;font-size:10px;letter-spacing:.2px}
 
-  /* ── Tables — horizontal scroll with momentum ── */
+  /* ── Tables – horizontal scroll with momentum ── */
   .ct-wrap{margin:0 -1px}
   .ct{min-width:480px}
   .ct th{padding:7px 8px;font-size:8px}
@@ -443,7 +469,8 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .hdr{padding:0 8px}
   .hdr-logo{height:18px}
   .stryker-text{display:none}
-  .psw-btn{padding:3px 6px;font-size:8px}
+  .psw-btn{padding:3px 6px;font-size:8px;gap:0}
+  .psw-btn .dot{display:none}
   .wrap{padding:8px;gap:10px}
   .cd-b{padding:12px}
   .sum-cell{padding:10px 12px}
@@ -455,6 +482,16 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   .pvh h3{font-size:16px}
   .pve .ea{font-size:18px}
   .tp{font-size:11px;padding:8px 0}
+  /* Lease/Dealer page extra-small */
+  #pg-lease > div, #pg-dlr > div{padding:10px 8px!important}
+  #pg-lease .dlr-hero h2{font-size:16px}
+  #pg-lease .cd-b{padding:10px}
+  .llc-row{padding:5px 8px}
+  .llc-row .ll, .llc-row .lv{font-size:9px}
+  .llc-savings .sav-amount{font-size:17px}
+  .llc-card-top{font-size:9px;padding:6px 8px}
+  .pb{padding:8px 4px;font-size:9px}
+  .pb small{font-size:7px}
 }
 
 /* ═══ PRINT ═══ */
@@ -485,7 +522,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 <div class="wrap">
   <div>
     <div class="cd">
-      <div class="mbn ib">🔒 Internal View — Subvention Visible</div>
+      <div class="mbn ib">🔒 Internal View – Subvention Visible</div>
       <div class="mbn eb">👤 Customer View</div>
       <div class="cd-h"><div class="cd-i" style="background:var(--teal-bg);color:var(--teal)">⚙</div><h2>Deal Configuration</h2></div>
       <div class="cd-b">
@@ -523,6 +560,12 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
         <div class="fg">
           <label class="fl">Tenure</label>
           <div class="trow" id="tGrid"></div>
+        </div>
+        <div class="hr"></div>
+        <div class="fg">
+          <label class="fl">Product Details <span style="font-weight:500;color:var(--ink5);text-transform:none;letter-spacing:0">Optional</span></label>
+          <textarea id="xProd" class="fi" rows="3" placeholder="Example: Product / model / SKU / package notes" style="resize:vertical;min-height:74px;line-height:1.45"></textarea>
+          <div class="fh">Appears on quote only if filled</div>
         </div>
       </div>
     </div>
@@ -581,35 +624,51 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 <div class="page" id="pg-lease">
 <div style="max-width:960px;margin:0 auto;padding:24px 16px">
   <div class="dlr-hero">
-    <h2>Lease / Rental Model</h2>
-    <p>Operating lease with full rental deductibility — powered by PTPM rental factors</p>
+    <h2>Rental Model</h2>
+    <p>Finance Lease, Tax-deductible rentals</p>
   </div>
 
   <!-- Lease Input Card -->
   <div class="cd" style="margin-bottom:20px">
     <div class="cd-h"><div class="cd-i" style="background:#f3e8ff;color:#8B5CF6">📋</div><h2>Lease Configuration</h2></div>
     <div class="cd-b">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-        <div class="fg"><label class="fl">Equipment Value (Base)</label><div class="iw"><span class="ip">₹</span><input type="text" id="leaseInv" class="fi hp" value="10000000" inputmode="numeric" onchange="calcLease()"></div><div class="fh" id="leaseInvH"></div></div>
-        <div class="fg"><label class="fl">GST Rate</label><div class="iw"><input type="number" id="leaseGST" class="fi hs" value="5" step="1" onchange="calcLease()"><span class="is">%</span></div></div>
-        <div class="fg"><label class="fl">Advance Rental</label><div class="iw"><input type="number" id="leaseAdv" class="fi hs" value="20" step="5" onchange="calcLease()"><span class="is">%</span></div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px">
+        <div class="fg"><label class="fl">Equipment Value (incl. taxes)</label><div class="iw"><span class="ip">₹</span><input type="text" id="leaseInv" class="fi hp" value="3350000" inputmode="numeric" onchange="calcLease()"></div><div class="fh" id="leaseInvH">Ex-GST: –</div></div>
+        <div class="fg"><label class="fl">GST Rate</label><div class="iw"><input type="number" id="leaseGSTPct" class="fi hs" value="5" step="0.01" min="0" max="28" onchange="calcLease()"><span class="is">%</span></div></div>
+        <div class="fg"><label class="fl">Corporate Tax</label><div class="iw"><input type="number" id="leaseTax" class="fi hs" value="25.17" step="0.01" onchange="calcLease()"><span class="is">%</span></div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-        <div class="fg"><label class="fl">Corporate Tax Rate</label><div class="iw"><input type="number" id="leaseTax" class="fi hs" value="25.17" step="0.01" onchange="calcLease()"><span class="is">%</span></div></div>
-        <div class="fg"><label class="fl">Advance (₹)</label><div class="fh" id="leaseAdvAmt" style="font-size:14px;font-weight:700;color:var(--ink);margin-top:8px">—</div></div>
+      <div class="fg" style="margin-top:14px">
+        <label class="fl">Lease Type</label>
+        <div class="prow" style="margin-top:4px">
+          <button type="button" class="pb on" data-lmode="advance" onclick="setLeaseMode('advance')">Advance Rental<small>Paid at beginning of term</small></button>
+          <button type="button" class="pb" data-lmode="residual" onclick="setLeaseMode('residual')">Residual Value<small>Paid at end of term</small></button>
+        </div>
+      </div>
+      <div class="fg" style="margin-top:12px">
+        <label class="fl" id="leaseAdvPctLabel">Advance Rental %</label>
+        <div class="prow" style="margin-top:4px">
+          <button type="button" class="pb on" data-ladv="20" onclick="setLeaseAdvPct('20')">20%</button>
+          <button type="button" class="pb" data-ladv="10" onclick="setLeaseAdvPct('10')">10%</button>
+        </div>
+        <input type="hidden" id="leaseMode" value="advance">
+        <input type="hidden" id="leaseAdvPct" value="20">
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:12px;padding:10px 12px;background:var(--sf2);border-radius:var(--rs);font-size:11px">
+        <span style="color:var(--ink3);font-weight:500" id="leaseDepLabel">Deposit (20%)</span>
+        <span style="color:var(--ink2);font-weight:600;font-family:var(--m)" id="leaseAdvAmt">–</span>
       </div>
     </div>
   </div>
 
   <!-- Lease All Tenures Table -->
   <div class="cd" style="margin-bottom:20px">
-    <div class="cd-h"><div class="cd-i" style="background:#f3e8ff;color:#8B5CF6">📊</div><h2>Lease Rental — All Tenures</h2></div>
+    <div class="cd-h"><div class="cd-i" style="background:#f3e8ff;color:#8B5CF6">📊</div><h2>Lease Rental – All Tenures</h2></div>
     <div style="padding:0;overflow-x:auto"><table class="ct" id="leaseTbl"></table></div>
   </div>
 
   <!-- Loan vs Lease Comparison -->
   <div class="cd">
-    <div class="cd-h"><div class="cd-i" style="background:var(--green-bg);color:var(--green)">⚖</div><h2>Loan vs Lease — Post-Tax Comparison</h2></div>
+    <div class="cd-h"><div class="cd-i" style="background:var(--green-bg);color:var(--green)">⚖</div><h2>Loan vs Lease – Post-Tax Comparison</h2></div>
     <div class="cd-b" id="loanVsLeaseContent"></div>
   </div>
 </div>
@@ -625,7 +684,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
       <div><h3>Siemens Financial Services</h3><div class="dlr-sub">EMI-Based Dealer Financing · 6–12 Month Tenure</div></div>
     </div>
     <div class="dlr-card-b">
-      <div class="dlr-feat"><div class="dlr-feat-title">How It Works</div><ul class="dlr-feat-list"><li>Distributor-focused EMI solutions for 6 or 12 months</li><li>Dealer pays a one-time upfront facility fee (+ 18% GST) — no recurring interest</li><li>Fee varies by tenure and dealer's credit terms with Stryker (0 to 90 days)</li><li>EMI starts 30 days after invoicing</li><li>Stryker receives full payment within 90 days</li><li>Applicable to all channel partners with 1+ year relationship</li></ul></div>
+      <div class="dlr-feat"><div class="dlr-feat-title">How It Works</div><ul class="dlr-feat-list"><li>Distributor-focused EMI solutions for 6 or 12 months</li><li>Dealer pays a one-time upfront facility fee (+ 18% GST) – no recurring interest</li><li>Fee varies by tenure and dealer's credit terms with Stryker (0 to 90 days)</li><li>EMI starts 30 days after invoicing</li><li>Stryker receives full payment within 90 days</li><li>Applicable to all channel partners with 1+ year relationship</li></ul></div>
       <div class="dlr-feat"><div class="dlr-feat-title">Upfront Fee Matrix <span style="text-transform:none;font-weight:400;letter-spacing:0">(% of Loan Amount + 18% GST)</span></div><div class="dlr-tbl-wrap"><table class="dlr-tbl"><thead><tr><th></th><th>90-Day</th><th>60-Day</th><th>45-Day</th><th>30-Day</th><th>100% Adv</th></tr></thead><tbody><tr><td>6 Months</td><td>2.50%</td><td>3.00%</td><td>3.75%</td><td>4.00%</td><td>4.50%</td></tr><tr><td>12 Months</td><td>6.00%</td><td>6.50%</td><td>7.50%</td><td>7.75%</td><td>8.00%</td></tr></tbody></table></div></div>
       <div class="dlr-feat"><div class="dlr-feat-title">Documents Required</div><ul class="dlr-feat-list"><li>KYC documents</li><li>Audited Financial Statements</li><li>Existing loan position details</li><li>GST Returns</li></ul></div>
       <div class="dlr-cta"><div class="cta-label">Tailor-made for your dealers</div><div class="cta-text">Fee structures are customized based on the dealer's credit profile. Reach out to the <strong>Flex Financial team</strong> for dealer-specific proposals.</div></div>
@@ -637,7 +696,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
       <div><h3>Tata Capital</h3><div class="dlr-sub">Extended Credit / Overdraft Facility · Up to 180 Days</div></div>
     </div>
     <div class="dlr-card-b">
-      <div class="dlr-feat"><div class="dlr-feat-title">How It Works</div><ul class="dlr-feat-list"><li>Works like an OD or CC limit — not traditional EMI</li><li>Stryker's existing credit period (0–90 days) remains interest-free</li><li>Tata Capital provides an additional 90 days beyond Stryker's credit period</li><li>Interest charged per-day for the Tata Capital period only</li><li>Dealer gets a dedicated credit limit for Stryker purchases</li><li>Can finance any number of bills within the approved limit</li></ul></div>
+      <div class="dlr-feat"><div class="dlr-feat-title">How It Works</div><ul class="dlr-feat-list"><li>Works like an OD or CC limit – not traditional EMI</li><li>Stryker's existing credit period (0–90 days) remains interest-free</li><li>Tata Capital provides an additional 90 days beyond Stryker's credit period</li><li>Interest charged per-day for the Tata Capital period only</li><li>Dealer gets a dedicated credit limit for Stryker purchases</li><li>Can finance any number of bills within the approved limit</li></ul></div>
       <div class="dlr-feat"><div class="dlr-feat-title">Payment Timeline</div></div>
       <div style="padding:4px 0 20px"><div class="tl-bar"><div class="tl-seg s1">STRYKER CREDIT</div><div class="tl-seg s2">TATA CAPITAL</div></div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink4);font-weight:600;margin-top:5px;padding:0 2px"><span>Day 0</span><span>Day 90</span><span>Day 180</span></div></div>
       <div class="dlr-feat"><div class="dlr-feat-title">Documents Required</div><ul class="dlr-feat-list"><li>KYC documents</li><li>Audited Financial Statements</li><li>Existing loan position details</li><li>GST Returns</li></ul></div>
@@ -650,7 +709,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 <script>
 /* ═══════════════════════════════════════════════════════════
    CONFIRMED NBFC RATE CARD (validated with financing partner)
-   Source: Live validation call — all 28 data points match exactly
+   Source: Live validation call – all 28 data points match exactly
    ═══════════════════════════════════════════════════════════ */
 const CFG={
   tenures:[6,12,18,24,36,48,60],
@@ -674,9 +733,9 @@ const CFG={
     disc:"This quotation is indicative and subject to final credit approval by the financing partner."}
 };
 const DOC_REQS={
-  individual:["Pan Card — Individual","Aadhaar Card","Residence Proof","Hospital Registration Certificate","Equipment Location Proof","Medical Degree Certificate (MBBS/BDS/MD etc.)"],
-  partnership:["Pan Card — Company & Partners","Aadhaar Card — Partners","Company Address Proof","Hospital Registration Certificate","Equipment Location Proof","Partnership Deed & List of Partners","Guarantee of the Doctor Partner"],
-  pvtltd:["Pan Card — Company & Directors","Aadhaar Card — Directors","Company Address Proof","Hospital Registration Certificate","Equipment Location Proof","MOA/AOA & List of Shareholders","Guarantee of the Doctor Director"],
+  individual:["Pan Card – Individual","Aadhaar Card","Residence Proof","Hospital Registration Certificate","Equipment Location Proof","Medical Degree Certificate (MBBS/BDS/MD etc.)"],
+  partnership:["Pan Card – Company & Partners","Aadhaar Card – Partners","Company Address Proof","Hospital Registration Certificate","Equipment Location Proof","Partnership Deed & List of Partners","Guarantee of the Doctor Partner"],
+  pvtltd:["Pan Card – Company & Directors","Aadhaar Card – Directors","Company Address Proof","Hospital Registration Certificate","Equipment Location Proof","MOA/AOA & List of Shareholders","Guarantee of the Doctor Director"],
 };
 
 const C={
@@ -723,12 +782,13 @@ const C={
   isDoctorLoan(fin){return fin<=CFG.doctorLoanLimit}
 };
 
-const S={prog:'subv',tenure:CFG.defTenure,inv:3350000,advPct:20,budget:6.5,curPage:'int',advMode:'abs',customValid:null,taxRate:0.2517};
+const S={prog:'subv',tenure:CFG.defTenure,inv:3350000,advPct:20,budget:6.5,curPage:'int',advMode:'abs',customValid:null,taxRate:0.2517,productDetails:''};
 
 function fI(n){if(n==null||isNaN(n))return'–';const x=Math.round(n),ng=x<0,s=Math.abs(x).toString();if(s.length<=3)return(ng?'−':'')+'₹'+s;return(ng?'−':'')+'₹'+s.slice(0,-3).replace(/\B(?=(\d{2})+(?!\d))/g,',')+','+s.slice(-3)}
 function fN(n){return fI(n).replace(/₹/,'')}
 function fP(n){return n!=null?n.toFixed(2)+'%':'–'}
 function fD(d){return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}
+function esc(v){return String(v||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]}).replace(/\n/g,'<br>')}
 
 function init(){renderPills();bind();syncAdvDisplay();calc();document.getElementById('xInvH').textContent=fI(S.inv)}
 
@@ -747,7 +807,12 @@ function setPage(p){
   document.getElementById('pg-calc').classList.toggle('on',p==='int'||p==='ext');
   document.getElementById('pg-lease').classList.toggle('on',p==='lease');
   document.getElementById('pg-dlr').classList.toggle('on',p==='dlr');
-  if(p==='lease')calcLease();
+  if(p==='lease'){
+    // Auto-fill equipment value from internal page (S.inv is inclusive of GST, lease input now also inclusive)
+    const leaseInvEl=document.getElementById('leaseInv');
+    if(leaseInvEl)leaseInvEl.value=Math.round(S.inv);
+    calcLease();
+  }
 }
 
 /* ── Advance Mode Toggle (₹ vs %) ── */
@@ -805,6 +870,7 @@ function bind(){
   });
   document.getElementById('xCust').addEventListener('input',calc);
   document.getElementById('xSales').addEventListener('input',calc);
+  document.getElementById('xProd').addEventListener('input',function(){S.productDetails=this.value.trim();calc();});
 }
 
 function calc(){
@@ -860,11 +926,11 @@ function setBudget(v){
 function setZeroEMI(){
   const maxNeeded=CFG.zeroSubv[S.tenure];
   if(maxNeeded!==null&&maxNeeded!==undefined){
-    // 0% is achievable — pick the exact tier
+    // 0% is achievable – pick the exact tier
     const tier=TIERS.find(t=>t.subv>=maxNeeded);
     if(tier)setBudget(tier.subv);
   }else{
-    // 0% not achievable within 9% cap — pick max (9%)
+    // 0% not achievable within 9% cap – pick max (9%)
     setBudget(9);
   }
 }
@@ -873,55 +939,70 @@ function setZeroEMI(){
 function renderLLC(r){
   const el=document.getElementById('llcContent');
   const taxRate=S.taxRate||0.2517;
-  const totalRental=r.emi*r.tenure;
-  const totalOutflow=totalRental+r.adv;
+  // Use the same PTPM table and GST rate as the Lease page (so numbers match)
+  const ptpmTable=getPTPMTable();
+  const gstPctEl=document.getElementById('leaseGSTPct');
+  const gstPct=gstPctEl?(parseFloat(gstPctEl.value)||5):5;
+  const gstRate=gstPct/100;
+  const baseAsset=r.inv/(1+gstRate);
+  const ptpm=ptpmTable[r.tenure];
+  const lModeEl=document.getElementById('leaseMode');
+  const lAdvEl=document.getElementById('leaseAdvPct');
+  const lMode=lModeEl?lModeEl.value:'advance';
+  const lAdv=lAdvEl?parseFloat(lAdvEl.value):20;
+  const modeLabel=lMode==='advance'?'Advance Rental':'Residual Value';
 
-  // LOAN post-tax
-  const loanDeductible=r.custInt; // Only interest is deductible
+  // LOAN side (always available)
+  const loanTotalOutflow=(r.emi*r.tenure)+r.adv;
+  const loanDeductible=r.custInt;
   const loanTaxSaving=Math.max(0,loanDeductible)*taxRate;
-  const loanPostTax=totalOutflow-loanTaxSaving;
+  const loanPostTax=loanTotalOutflow-loanTaxSaving;
   const loanEffMonthly=loanPostTax/r.tenure;
 
-  // LEASE post-tax (same monthly payment, but 100% rental is deductible)
-  const leaseDeductible=totalRental; // Full rental
-  const leaseTaxSaving=leaseDeductible*taxRate;
-  const leasePostTax=totalOutflow-leaseTaxSaving;
-  const leaseEffMonthly=leasePostTax/r.tenure;
+  // LEASE side – needs PTPM at this tenure
+  let leaseHTML='';
+  let savings=null;
+  if(!ptpm){
+    leaseHTML=`<div class="llc-card lease" style="opacity:.7">
+      <div class="llc-card-top">Lease (${modeLabel} ${lAdv}%)</div>
+      <div class="llc-row" style="padding:14px;text-align:center;color:var(--ink4);font-size:11px">
+        Lease pricing not available at ${r.tenure}M for this configuration.<br>
+        Available tenures: ${Object.keys(ptpmTable).join('M, ')}M.<br>
+        Switch tenure on the left, or change Lease Type / % on the Rental Model page.
+      </div>
+    </div>`;
+  }else{
+    const leaseDeposit=r.inv*lAdv/100; // deposit on inclusive value, matches lease page
+    const leaseBaseRental=ptpm*baseAsset/1000;
+    const leaseRentalGST=leaseBaseRental*gstRate;
+    const leaseMonthly=leaseBaseRental+leaseRentalGST;
+    const leaseTotalRentals=leaseMonthly*r.tenure;
+    const leaseTotalOutflow=leaseDeposit+leaseTotalRentals;
+    // Post-tax: entire TCO is deductible (matches lease page)
+    const leasePostTax=leaseTotalOutflow*(1-taxRate);
+    const leaseTaxSaving=leaseTotalOutflow*taxRate;
+    const leaseEffMonthly=leasePostTax/r.tenure;
+    savings=loanPostTax-leasePostTax;
 
-  // Savings
-  const savings=loanPostTax-leasePostTax;
-  const savPct=(savings/r.inv*100).toFixed(1);
-
-  // Post-tax IRR (approximate using monthly cash flows)
-  // Loan: receives fin, pays EMI*(1 - taxRate*interestFraction) each month
-  // Lease: receives fin, pays Rental*(1-taxRate) each month
-  const leaseMonthlyPostTax=r.emi*(1-taxRate);
-  const loanMonthlyPostTax=r.emi-(r.custInt/r.tenure)*taxRate;
-  // IRR ≈ rate where PV of monthly payments = finance amount
-  function approxIRR(monthlyPay,n,pv){
-    // Newton's method to find monthly rate
-    let rm=0.005;
-    for(let iter=0;iter<100;iter++){
-      let f=0,fp=0;
-      for(let t=1;t<=n;t++){
-        const d=Math.pow(1+rm,t);
-        f+=monthlyPay/d;
-        fp-=t*monthlyPay/Math.pow(1+rm,t+1);
-      }
-      f-=pv;
-      const step=f/fp;
-      rm=rm-step;
-      if(Math.abs(step)<1e-10)break;
-    }
-    return rm*12*100; // annualized %
+    leaseHTML=`<div class="llc-card lease">
+      <div class="llc-card-top">Lease (${modeLabel} ${lAdv}%)</div>
+      <div class="llc-row"><span class="ll">Equipment Value (incl. GST)</span><span class="lv">${fI(r.inv)}</span></div>
+      <div class="llc-row"><span class="ll">${modeLabel}</span><span class="lv">${fI(leaseDeposit)}</span></div>
+      <div class="llc-row"><span class="ll">Total Rental/Month</span><span class="lv">${fI(leaseMonthly)}</span></div>
+      <div class="llc-row"><span class="ll">PTPM Factor</span><span class="lv">${ptpm.toFixed(2)}</span></div>
+      <div class="llc-row"><span class="ll">Tenure</span><span class="lv">${r.tenure} months</span></div>
+      <div class="llc-row"><span class="ll">Pre-Tax Outflow</span><span class="lv">${fI(leaseTotalOutflow)}</span></div>
+      <div class="llc-row dim"><span class="ll">Tax-Deductible</span><span class="lv">Full TCO: ${fI(leaseTotalOutflow)}</span></div>
+      <div class="llc-row dim"><span class="ll">Tax Savings</span><span class="lv">${fI(leaseTaxSaving)}</span></div>
+      <div class="llc-row highlight"><span class="ll">Post-Tax Cost</span><span class="lv">${fI(leasePostTax)}</span></div>
+      <div class="llc-row"><span class="ll">Eff. Monthly Cost</span><span class="lv">${fI(leaseEffMonthly)}</span></div>
+    </div>`;
   }
-  const loanIRR=r.fin>0?approxIRR(loanMonthlyPostTax,r.tenure,r.fin):0;
-  const leaseIRR=r.fin>0?approxIRR(leaseMonthlyPostTax,r.tenure,r.fin):0;
 
   el.innerHTML=`
     <div class="llc-head">
       <h3>Loan vs Lease Comparison</h3>
-      <p>Same monthly outflow — different post-tax economics</p>
+      <p>Loan uses EMI rate card. Lease uses PTPM rental factors, so pre-tax outflows can differ.</p>
     </div>
     <div class="llc-tax-row">
       <span class="llc-tax-label">Corporate Tax Rate:</span>
@@ -936,41 +1017,27 @@ function renderLLC(r){
         <div class="llc-row"><span class="ll">Advance Payment</span><span class="lv">${fI(r.adv)}</span></div>
         <div class="llc-row"><span class="ll">Monthly EMI</span><span class="lv">${fI(r.emi)}</span></div>
         <div class="llc-row"><span class="ll">Tenure</span><span class="lv">${r.tenure} months</span></div>
-        <div class="llc-row"><span class="ll">Total Outflow</span><span class="lv">${fI(totalOutflow)}</span></div>
+        <div class="llc-row"><span class="ll">Pre-Tax Outflow</span><span class="lv">${fI(loanTotalOutflow)}</span></div>
         <div class="llc-row dim"><span class="ll">Tax-Deductible</span><span class="lv">Interest only: ${fI(r.custInt)}</span></div>
         <div class="llc-row dim"><span class="ll">Tax Savings</span><span class="lv">${fI(loanTaxSaving)}</span></div>
         <div class="llc-row highlight"><span class="ll">Post-Tax Cost</span><span class="lv">${fI(loanPostTax)}</span></div>
         <div class="llc-row"><span class="ll">Eff. Monthly Cost</span><span class="lv">${fI(loanEffMonthly)}</span></div>
-        <div class="llc-row"><span class="ll">Post-Tax IRR</span><span class="lv">${loanIRR>0?loanIRR.toFixed(2)+'%':'—'}</span></div>
       </div>
-      <div class="llc-card lease">
-        <div class="llc-card-top">Lease (Rental)</div>
-        <div class="llc-row"><span class="ll">Equipment Value</span><span class="lv">${fI(r.inv)}</span></div>
-        <div class="llc-row"><span class="ll">Security Deposit</span><span class="lv">${fI(r.adv)}</span></div>
-        <div class="llc-row"><span class="ll">Monthly Rental</span><span class="lv">${fI(r.emi)}</span></div>
-        <div class="llc-row"><span class="ll">Tenure</span><span class="lv">${r.tenure} months</span></div>
-        <div class="llc-row"><span class="ll">Total Outflow</span><span class="lv">${fI(totalOutflow)}</span></div>
-        <div class="llc-row dim"><span class="ll">Tax-Deductible</span><span class="lv">Full rental: ${fI(leaseDeductible)}</span></div>
-        <div class="llc-row dim"><span class="ll">Tax Savings</span><span class="lv">${fI(leaseTaxSaving)}</span></div>
-        <div class="llc-row highlight"><span class="ll">Post-Tax Cost</span><span class="lv">${fI(leasePostTax)}</span></div>
-        <div class="llc-row"><span class="ll">Eff. Monthly Cost</span><span class="lv">${fI(leaseEffMonthly)}</span></div>
-        <div class="llc-row"><span class="ll">Post-Tax IRR</span><span class="lv">${leaseIRR>0?leaseIRR.toFixed(2)+'%':'—'}</span></div>
-      </div>
+      ${leaseHTML}
     </div>
 
-    <div class="llc-savings">
+    ${savings!==null?`<div class="llc-savings">
       <div class="sav-label">Post-Tax Savings with Lease</div>
       <div class="sav-amount">${fI(savings)}</div>
-      <div class="sav-sub">${savPct}% of equipment value over ${r.tenure} months</div>
-    </div>
+      <div class="sav-sub">${(savings/r.inv*100).toFixed(1)}% of equipment value over ${r.tenure} months</div>
+    </div>`:''}
 
     <div class="llc-points">
       <div class="lp-title">Why Lease Works Better Post-Tax</div>
-      <div class="lp-item">100% of lease rental is a deductible business expense under Section 37(1)</div>
-      <div class="lp-item">In a loan, only the interest component is deductible — principal repayment is not</div>
-      <div class="lp-item">Post-tax effective monthly cost is ₹${Math.round(loanEffMonthly-leaseEffMonthly).toLocaleString('en-IN')} lower per month with lease</div>
-      <div class="lp-item">Equipment stays off the hospital's balance sheet (operating lease treatment)</div>
-      <div class="lp-item">No depreciation tracking required — rental expense is straightforward</div>
+      <div class="lp-item">Loan pre-tax outflow = advance + EMI total; only interest is tax-deductible.</div>
+      <div class="lp-item">Lease pre-tax outflow = ${modeLabel.toLowerCase()} + PTPM-based total rentals (incl. GST); the full lease outflow is treated as tax-deductible.</div>
+      <div class="lp-item">Lease numbers here use the same PTPM table you have selected on the Rental Model page (${modeLabel}, ${lAdv}%).</div>
+      <div class="lp-item">Confirm NBFC treatment for GST input credit and any end-of-term transfer value if those need to be shown separately.</div>
     </div>
   `;
 }
@@ -1007,8 +1074,10 @@ function renderSch(r){
 }
 
 function renderPv(r){
-  const cu=document.getElementById('xCust').value||'Valued Customer';
-  const sa=document.getElementById('xSales').value||'Sales Representative';
+  const cu=esc(document.getElementById('xCust').value||'Valued Customer');
+  const sa=esc(document.getElementById('xSales').value||'Sales Representative');
+  const product=(S.productDetails||'').trim();
+  const productHTML=product?'<div class="pvr"><span class="pl">Product Details</span><span class="pv" style="text-align:right;max-width:58%;white-space:normal;line-height:1.5">'+esc(product)+'</span></div>':'';
   const now=new Date();
   const exp=S.customValid||(function(){const d=new Date(now);d.setDate(d.getDate()+CFG.co.validDays);return d})();
   const z=r.custRate===0;
@@ -1016,6 +1085,7 @@ function renderPv(r){
     <div class="pvh"><h3>${CFG.co.name}</h3><div class="ps">${CFG.co.tag}</div></div>
     <div class="pvb">
       <div style="margin-bottom:14px"><div style="font-size:9px;color:var(--ink5);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:3px">Financing Quotation For</div><div style="font-family:var(--fd);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.2px">${cu}</div><div style="font-size:11px;color:var(--ink4);margin-top:3px;font-weight:500">${fD(now)} · Valid until <span class="valid-edit" title="Click to edit validity date" onclick="editValidity()">${fD(exp)}</span></div></div>
+      ${productHTML}
       <div class="pvr"><span class="pl">Equipment Value (inc. taxes)</span><span class="pv">${fI(r.inv)}</span></div>
       <div class="pvr"><span class="pl">Upfront Payment (${r.advPct.toFixed(0)}%)</span><span class="pv">${fI(r.adv)}</span></div>
       <div class="pvr"><span class="pl">Finance Amount</span><span class="pv">${fI(r.fin)}</span></div>
@@ -1112,49 +1182,81 @@ window.onload=function(){
 }
 
 /* ═══ LEASE CALCULATOR ═══ */
-const PTPM={12:70.25, 24:37.25, 36:26.30, 48:20.80, 60:17.60};
+const PTPM_TABLES={
+  advance_20: {12:70.25, 24:37.25, 36:26.30, 48:20.80, 60:17.60},
+  advance_10: {12:80.00, 24:42.50, 36:30.25, 48:24.20, 60:20.50},
+  residual_20:{12:72.00, 24:38.60, 36:27.50}, // Only 3 tenures available
+  residual_10:{12:70.50, 24:37.25, 36:26.30, 48:20.80, 60:17.50},
+};
+function getPTPMTable(){
+  const mode=document.getElementById('leaseMode')?document.getElementById('leaseMode').value:'advance';
+  const adv=document.getElementById('leaseAdvPct')?document.getElementById('leaseAdvPct').value:'20';
+  return PTPM_TABLES[mode+'_'+adv]||PTPM_TABLES.advance_20;
+}
+const PTPM=PTPM_TABLES.advance_20; // Default fallback for renderLLC compatibility
+
+function setLeaseMode(m){
+  document.getElementById('leaseMode').value=m;
+  document.querySelectorAll('[data-lmode]').forEach(b=>b.classList.toggle('on',b.dataset.lmode===m));
+  document.getElementById('leaseAdvPctLabel').textContent=(m==='advance'?'Advance Rental %':'Residual Value %');
+  // If switching to residual_20 with advance pct=20, we only have 3 tenures
+  calcLease();
+}
+function setLeaseAdvPct(p){
+  document.getElementById('leaseAdvPct').value=p;
+  document.querySelectorAll('[data-ladv]').forEach(b=>b.classList.toggle('on',b.dataset.ladv===p));
+  calcLease();
+}
 
 function calcLease(){
   const invRaw=document.getElementById('leaseInv').value.replace(/[^0-9]/g,'');
-  const baseAsset=parseFloat(invRaw)||0;
-  const gstPct=parseFloat(document.getElementById('leaseGST').value)||5;
-  const advPct=parseFloat(document.getElementById('leaseAdv').value)||20;
+  const totalAsset=parseFloat(invRaw)||0; // Input is now INCLUSIVE of taxes
+  const gstPct=parseFloat(document.getElementById('leaseGSTPct').value)||5;
+  const mode=document.getElementById('leaseMode').value; // 'advance' or 'residual'
+  const advPctNum=parseFloat(document.getElementById('leaseAdvPct').value)||20;
   const taxRate=(parseFloat(document.getElementById('leaseTax').value)||25.17)/100;
+  const ptpmTable=getPTPMTable();
   
-  const gstAmt=baseAsset*gstPct/100;
-  const totalAsset=baseAsset+gstAmt;
-  const advance=totalAsset*advPct/100;
+  // Derive base asset from total (totalAsset = baseAsset × (1 + gst/100))
+  const baseAsset=totalAsset/(1+gstPct/100);
+  const gstAmt=totalAsset-baseAsset;
+  const deposit=totalAsset*advPctNum/100;
+  const isAdvance=mode==='advance';
+  const depLabel=isAdvance?'Advance':'Residual';
   
-  document.getElementById('leaseInvH').textContent=baseAsset>0?fI(baseAsset):'';
-  document.getElementById('leaseAdvAmt').textContent=fI(advance);
+  document.getElementById('leaseInvH').textContent=baseAsset>0?`Ex-GST: ${fI(baseAsset)}`:'Ex-GST: –';
+  document.getElementById('leaseAdvAmt').textContent=fI(deposit);
+  document.getElementById('leaseDepLabel').textContent=`${depLabel} (${advPctNum}%)`;
+  
+  // Determine available tenures based on the PTPM table
+  const tenures=Object.keys(ptpmTable).map(Number).sort((a,b)=>a-b);
   
   // Build lease table
-  const tenures=[12,24,36,48,60];
   let h=`<thead><tr><th style="text-align:left">Lease Details</th>`;
   tenures.forEach(t=>h+=`<th>${t}M</th>`);
   h+=`</tr></thead><tbody>`;
   
   const leaseData={};
   tenures.forEach(t=>{
-    const ptpm=PTPM[t]||0;
+    const ptpm=ptpmTable[t]||0;
     const rental=ptpm*baseAsset/1000;
     const rentalGST=rental*gstPct/100;
     const totalRental=rental+rentalGST;
     const totalOutflow=totalRental*t;
-    const tco=advance+totalOutflow;
+    const tco=deposit+totalOutflow;
     const postTax=tco*(1-taxRate);
     leaseData[t]={ptpm,rental,rentalGST,totalRental,totalOutflow,tco,postTax};
   });
   
   const rows=[
     ['Asset Cost (Base)',t=>fI(baseAsset)],
-    ['GST @'+gstPct+'%',t=>fI(gstAmt)],
+    [`GST @${gstPct}%`,t=>fI(gstAmt)],
     ['Total Asset Cost',t=>fI(totalAsset)],
-    ['Advance @'+advPct+'%',t=>fI(advance)],
+    [`${depLabel} @${advPctNum}%`,t=>fI(deposit)],
     ['PTPM Factor',t=>leaseData[t].ptpm.toFixed(2)],
-    ['Monthly Rental',t=>fI(leaseData[t].rental),'re'],
-    ['GST on Rental',t=>fI(leaseData[t].rentalGST)],
-    ['Total Rental/Month',t=>fI(leaseData[t].totalRental)],
+    ['Monthly Rental',t=>fI(leaseData[t].rental)],
+    [`GST on Rental @${gstPct}%`,t=>fI(leaseData[t].rentalGST)],
+    ['Total Rental/Month',t=>fI(leaseData[t].totalRental),'re'],
     ['Total Rental Outflow',t=>fI(leaseData[t].totalOutflow)],
     ['Total Cost of Ownership',t=>fI(leaseData[t].tco)],
     ['Post-Tax Cost @'+((taxRate*100).toFixed(2))+'%',t=>fI(leaseData[t].postTax),'re'],
@@ -1168,23 +1270,22 @@ function calcLease(){
   h+=`</tbody>`;
   document.getElementById('leaseTbl').innerHTML=h;
   
-  // Loan vs Lease comparison (use 24M as reference or selected tenure from main calc)
+  // Loan vs Lease comparison
   const cmpEl=document.getElementById('loanVsLeaseContent');
-  const compTenures=[12,24,36,60];
+  // Use only tenures available in current PTPM table for comparison (intersect with [12,24,36,60])
+  const compTenures=[12,24,36,60].filter(t=>tenures.includes(t));
   
-  let ch=`<div class="llc-head"><h3>Post-Tax: Loan vs Lease</h3><p>Same equipment — which financing structure costs less after tax?</p></div>`;
+  let ch=`<div class="llc-head"><h3>Post-Tax: Loan vs Lease</h3><p>Same equipment – which financing structure costs less after tax?</p></div>`;
   
   ch+=`<div class="ct-wrap"><table class="ct"><thead><tr><th style="text-align:left">Metric</th>`;
   compTenures.forEach(t=>ch+=`<th>${t}M</th>`);
   ch+=`</tr></thead><tbody>`;
   
-  // For loan, use the same invoice value with current subvention from main calculator
-  // Loan: invoice = totalAsset (same as lease total), advance same %
   const loanInv=totalAsset;
-  const loanAdv=advance;
+  const loanAdv=deposit;
   const loanFin=loanInv-loanAdv;
   
-  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LEASE (Operating Rental)</td></tr>`;
+  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LEASE (Finance Lease)</td></tr>`;
   ch+=`<tr><td>Monthly Rental (inc GST)</td>`;
   compTenures.forEach(t=>ch+=`<td>${fI(leaseData[t]?leaseData[t].totalRental:0)}</td>`);
   ch+=`</tr><tr><td>Total Cost of Ownership</td>`;
@@ -1193,8 +1294,7 @@ function calcLease(){
   compTenures.forEach(t=>ch+=`<td>${fI(leaseData[t]?leaseData[t].postTax:0)}</td>`);
   ch+=`</tr>`;
   
-  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LOAN (EMI — No Subvention)</td></tr>`;
-  // Loan with 0% subvention (customer bears full interest)
+  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LOAN (EMI – No Subvention)</td></tr>`;
   ch+=`<tr><td>Monthly EMI</td>`;
   compTenures.forEach(t=>{
     const custRate=C.getCustRate(t,0);
@@ -1235,16 +1335,16 @@ function calcLease(){
     const loanPT=loanTotal-(interest*taxRate);
     const leasePT=leaseData[t]?leaseData[t].postTax:0;
     const saving=loanPT-leasePT;
-    ch+=`<td style="color:var(--green);font-weight:700">${saving>0?fI(saving):'—'}</td>`;
+    ch+=`<td style="color:var(--green);font-weight:700">${saving>0?fI(saving):'–'}</td>`;
   });
   ch+=`</tr></tbody></table></div>`;
   
   ch+=`<div class="llc-points" style="margin-top:16px">
     <div class="lp-title">Why Lease is Better Post-Tax</div>
     <div class="lp-item">100% of lease rental (including advance) is a deductible business expense</div>
-    <div class="lp-item">In a loan, only the interest component is deductible — principal repayment is not</div>
+    <div class="lp-item">In a loan, only the interest component is deductible – principal repayment is not</div>
     <div class="lp-item">Lease keeps the equipment off the hospital's balance sheet</div>
-    <div class="lp-item">No depreciation tracking — rental expense is a straightforward P&L deduction</div>
+    <div class="lp-item">No depreciation tracking – rental expense is a straightforward P&L deduction</div>
     <div class="lp-item">At ${(taxRate*100).toFixed(2)}% corporate tax, every ₹1 of rental saves ₹${(taxRate).toFixed(2)} in tax</div>
   </div>`;
   
