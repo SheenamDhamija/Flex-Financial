@@ -496,11 +496,52 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 
 /* ═══ PRINT ═══ */
 @media print{.np{display:none!important}body{background:#fff}.hdr{position:static}.wrap{display:block;max-width:100%}}
+/* In-page print: when a quote is staged, hide everything except #printArea */
+#printArea{display:none}
+body.printing #printArea{display:block}
+@media print{
+  body.printing>*:not(#printArea){display:none!important}
+  body.printing #printArea{display:block!important}
+  body.printing #printArea *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+/* Quote print styles (shared by loan + lease quotes) */
+#printArea .qpw{max-width:760px;margin:0 auto;border:2px solid #DDE4E7;border-radius:10px;overflow:hidden;font-family:var(--f);color:#0F1A1E}
+#printArea .qph{background:linear-gradient(135deg,#0a1628,#142d54);color:#fff;padding:30px 28px;text-align:center;position:relative}
+#printArea .qph h3{font-family:var(--fd);font-size:26px;font-weight:600;letter-spacing:.5px}
+#printArea .qph .ps{font-size:11px;opacity:.55;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
+#printArea .qph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C9952D,#E8C966,#C9952D,transparent);opacity:.6}
+#printArea .qpb{padding:26px 28px}
+#printArea .qpcust{margin-bottom:16px}
+#printArea .qpcust .cl{font-size:9px;color:#8DA0A8;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:3px}
+#printArea .qpcust .cn{font-family:var(--fd);font-size:21px;font-weight:600;color:#0F1A1E}
+#printArea .qpcust .cd{font-size:11px;color:#8DA0A8;margin-top:3px;font-weight:500}
+#printArea .qpr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EFF2F3;gap:12px}
+#printArea .qpr .ql{color:#5A6F76;font-size:13px;font-weight:500}
+#printArea .qpr .qv{font-family:var(--m);font-weight:600;font-size:13px;color:#0F1A1E;text-align:right}
+#printArea .qpcfg{background:#f6f1fb;border:1px solid #e4d4f2;border-radius:8px;padding:14px 16px;margin:18px 0;display:flex;flex-wrap:wrap;gap:16px}
+#printArea .qpcfg .ci{font-size:12px}
+#printArea .qpcfg .ci b{display:block;font-size:10px;color:#8B5CF6;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;font-weight:700}
+#printArea .qpe{background:linear-gradient(135deg,#EDF4F5,#e0eff2);border:2px solid #C5DDE2;border-radius:10px;padding:20px;text-align:center;margin:20px 0}
+#printArea .qpe .el{font-size:10px;color:#3A7A8A;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+#printArea .qpe .ea{font-family:var(--m);font-size:28px;font-weight:800;color:#1B3A40;letter-spacing:-1px}
+#printArea .qpe .et{font-size:13px;color:#5A6F76;margin-top:4px;font-weight:500}
+#printArea .qpz{display:inline-block;background:#0A7B5A;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:14px;margin-top:6px}
+#printArea table.qpt{width:100%;border-collapse:collapse;margin:18px 0;font-size:12px}
+#printArea table.qpt th,#printArea table.qpt td{padding:9px 10px;text-align:center;border-bottom:1px solid #EFF2F3}
+#printArea table.qpt th{background:#f3e8ff;color:#6b21a8;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+#printArea table.qpt td{font-family:var(--m);font-weight:500}
+#printArea table.qpt .lc{text-align:left;font-family:var(--f);font-weight:600;color:#2D3F45}
+#printArea table.qpt tr.hl td{background:#EDF4F5;font-weight:800;color:#1B3A40}
+#printArea .qpf{background:#F8FAFB;padding:18px 28px;border-top:1px solid #DDE4E7}
+#printArea .qpd{font-size:10px;color:#8DA0A8;line-height:1.7}
+#printArea .qpbtns{max-width:760px;margin:16px auto;display:flex;gap:8px}
+@media print{#printArea .qpbtns{display:none!important}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .cd{animation:fadeUp .4s ease-out both}.rcol .cd{animation-delay:.1s}
 </style>
 </head>
 <body>
+<div id="printArea"></div>
 
 <header class="hdr np">
   <div class="hdr-left">
@@ -670,6 +711,12 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
   <div class="cd">
     <div class="cd-h"><div class="cd-i" style="background:var(--green-bg);color:var(--green)">⚖</div><h2>Loan vs Lease – Post-Tax Comparison</h2></div>
     <div class="cd-b" id="loanVsLeaseContent"></div>
+  </div>
+
+  <!-- Lease Action Buttons -->
+  <div class="btng" style="margin-top:20px">
+    <button class="btn btn-b" onclick="printLeaseQuote()">📄 Save / Print Lease Quote</button>
+    <button class="btn btn-o" onclick="downloadLeaseExcel()">📊 Download Excel</button>
   </div>
 </div>
 </div>
@@ -1137,49 +1184,24 @@ function oTab(id,btn){
 }
 
 function printQuote(){
+  // Loan quote — renders the currently-selected tenure into #printArea, then prints in-page
   oTab('pv',document.querySelectorAll('.tb')[3]);
   const quoteHTML=document.getElementById('pvW').innerHTML;
-  const w=window.open('','_blank','width=800,height=1000');
-  if(!w){alert('Please allow popups for this site, then try again.');return;}
-  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quote</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#fff;color:#0F1A1E;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.pw{max-width:680px;margin:0 auto;border:2px solid #DDE4E7;border-radius:10px;overflow:hidden}
-.pvh{background:linear-gradient(135deg,#1B3A40,#2A5560);color:#fff;padding:32px 28px;text-align:center;position:relative}
-.pvh h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:600;letter-spacing:.5px}
-.pvh .ps{font-size:11px;opacity:.5;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
-.pvh::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C9952D,#E8C966,#C9952D,transparent);opacity:.5}
-.pvb{padding:28px}
-.pvr{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #EFF2F3;gap:8px}
-.pvr:last-child{border-bottom:none}
-.pvr .pl{color:#5A6F76;font-size:14px;font-weight:500}
-.pvr .pv{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;color:#0F1A1E}
-.pve{background:linear-gradient(135deg,#EDF4F5,#e0eff2);border:2px solid #C5DDE2;border-radius:10px;padding:22px;text-align:center;margin:22px 0;position:relative}
-.pve::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:40px;height:2px;background:#C9952D;border-radius:0 0 2px 2px}
-.pve .el{font-size:10px;color:#3A7A8A;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.pve .ea{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;color:#1B3A40;letter-spacing:-1px}
-.pve .et{font-size:13px;color:#5A6F76;margin-top:4px;font-weight:500}
-.pzb{display:inline-block;background:#0A7B5A;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:14px;margin-top:6px}
-.pvf{background:#F8FAFB;padding:20px 28px;border-top:1px solid #DDE4E7}
-.pvd{font-size:10px;color:#B8C8CE;line-height:1.7}
-.valid-edit{border-bottom:none!important;cursor:default!important}
-.no-print{display:none}
-@media print{body{background:#fff}.pw{border:none;border-radius:0;max-width:100%}.pvh{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-</style></head><body>
-<div class="pw">${quoteHTML}</div>
-<script>
-window.onload=function(){
-  // Small delay to let fonts load
-  setTimeout(function(){window.print();},500);
-  // Close after print dialog
-  window.onafterprint=function(){window.close();};
-};
-<\/script></body></html>`);
-  w.document.close();
+  const pa=document.getElementById('printArea');
+  pa.innerHTML='<div class="pw" style="max-width:680px;margin:0 auto">'+quoteHTML+'</div>'+
+    '<div class="qpbtns"><button class="btn btn-b" onclick="window.print()">Print / Save as PDF</button>'+
+    '<button class="btn btn-o" onclick="closePrint()">Close</button></div>';
+  document.body.classList.add('printing');
+  window.scrollTo(0,0);
+  setTimeout(function(){window.print();},300);
 }
+function closePrint(){
+  document.body.classList.remove('printing');
+  document.getElementById('printArea').innerHTML='';
+}
+window.addEventListener('afterprint',function(){
+  document.body.classList.remove('printing');
+});
 
 /* ═══ LEASE CALCULATOR ═══ */
 const PTPM_TABLES={
@@ -1284,6 +1306,11 @@ function calcLease(){
   const loanInv=totalAsset;
   const loanAdv=deposit;
   const loanFin=loanInv-loanAdv;
+  // Use the subvention selection from page 1 (Internal): S.prog + S.budget
+  const useSubv=S.prog==='subv';
+  const subvBudget=useSubv?S.budget:0;
+  // Helper: loan customer rate for a tenure using the selected subvention
+  const loanRate=t=>useSubv?C.getCustRate(t,subvBudget):C.getCustRate(t,0);
   
   ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LEASE (Finance Lease)</td></tr>`;
   ch+=`<tr><td>Monthly Rental (inc GST)</td>`;
@@ -1294,30 +1321,26 @@ function calcLease(){
   compTenures.forEach(t=>ch+=`<td>${fI(leaseData[t]?leaseData[t].postTax:0)}</td>`);
   ch+=`</tr>`;
   
-  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LOAN (EMI – No Subvention)</td></tr>`;
+  ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px">LOAN (EMI)</td></tr>`;
   ch+=`<tr><td>Monthly EMI</td>`;
   compTenures.forEach(t=>{
-    const custRate=C.getCustRate(t,0);
-    const emi=C.pmt(custRate,t,loanFin);
+    const emi=C.pmt(loanRate(t),t,loanFin);
     ch+=`<td>${fI(emi)}</td>`;
   });
   ch+=`</tr><tr><td>Total Outflow (EMI+Adv)</td>`;
   compTenures.forEach(t=>{
-    const custRate=C.getCustRate(t,0);
-    const emi=C.pmt(custRate,t,loanFin);
+    const emi=C.pmt(loanRate(t),t,loanFin);
     ch+=`<td>${fI(emi*t+loanAdv)}</td>`;
   });
   ch+=`</tr><tr><td>Interest (Tax-Deductible)</td>`;
   compTenures.forEach(t=>{
-    const custRate=C.getCustRate(t,0);
-    const emi=C.pmt(custRate,t,loanFin);
+    const emi=C.pmt(loanRate(t),t,loanFin);
     const interest=(emi*t)-loanFin;
     ch+=`<td>${fI(interest)}</td>`;
   });
   ch+=`</tr><tr class="re"><td>Post-Tax Cost (Loan)</td>`;
   compTenures.forEach(t=>{
-    const custRate=C.getCustRate(t,0);
-    const emi=C.pmt(custRate,t,loanFin);
+    const emi=C.pmt(loanRate(t),t,loanFin);
     const interest=(emi*t)-loanFin;
     const total=emi*t+loanAdv;
     const postTax=total-(interest*taxRate);
@@ -1328,8 +1351,7 @@ function calcLease(){
   ch+=`<tr class="row-head"><td colspan="${compTenures.length+1}" style="font-size:9px;padding:5px 8px;color:var(--green)">▾ LEASE ADVANTAGE</td></tr>`;
   ch+=`<tr class="ss"><td>Post-Tax Savings with Lease</td>`;
   compTenures.forEach(t=>{
-    const custRate=C.getCustRate(t,0);
-    const emi=C.pmt(custRate,t,loanFin);
+    const emi=C.pmt(loanRate(t),t,loanFin);
     const interest=(emi*t)-loanFin;
     const loanTotal=emi*t+loanAdv;
     const loanPT=loanTotal-(interest*taxRate);
@@ -1349,6 +1371,160 @@ function calcLease(){
   </div>`;
   
   cmpEl.innerHTML=ch;
+  
+  // Save current lease state for export/print
+  S.leaseState={baseAsset,gstAmt,totalAsset,gstPct,deposit,depLabel,advPctNum,mode,taxRate,tenures,leaseData,modeLabel:isAdvance?'Advance Rental':'Residual Value'};
+}
+
+/* ── Print Lease Quote (customer-safe, opens print dialog) ── */
+function printLeaseQuote(){
+  const ls=S.leaseState;
+  if(!ls){alert('Please open the Rental Model page first.');return;}
+  // Use the tenure selected on page 1 (S.tenure); fall back to first available
+  let t=S.tenure;
+  if(!ls.leaseData[t]){t=ls.tenures[0];}
+  const d=ls.leaseData[t];
+  if(!d){alert('No lease data for the selected tenure.');return;}
+  const cu=document.getElementById('xCust').value||'Valued Customer';
+  const prod=(document.getElementById('xProduct')||{}).value||'';
+  const now=new Date();
+  const fmtD=x=>x.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const prodHTML=prod.trim()?`<div class="qpr"><span class="ql">Product Details</span><span class="qv">${prod.trim().replace(/</g,'&lt;')}</span></div>`:'';
+
+  const html=`
+    <div class="qpw">
+      <div class="qph"><h3>Stryker India</h3><div class="ps">Finance Lease – Rental Quotation</div></div>
+      <div class="qpb">
+        <div class="qpcust">
+          <div class="cl">Lease Quotation For</div>
+          <div class="cn">${cu}</div>
+          <div class="cd">${fmtD(now)}</div>
+        </div>
+        ${prodHTML}
+        <div class="qpr"><span class="ql">Equipment Value (incl. taxes)</span><span class="qv">${fI(ls.totalAsset)}</span></div>
+        <div class="qpr"><span class="ql">Base Asset (ex-GST)</span><span class="qv">${fI(ls.baseAsset)}</span></div>
+        <div class="qpcfg">
+          <div class="ci"><b>Lease Type</b>${ls.modeLabel}</div>
+          <div class="ci"><b>${ls.depLabel} %</b>${ls.advPctNum}%</div>
+          <div class="ci"><b>${ls.depLabel} Amount</b>${fI(ls.deposit)}</div>
+          <div class="ci"><b>Tenure</b>${t} Months</div>
+          <div class="ci"><b>Corporate Tax</b>${(ls.taxRate*100).toFixed(2)}%</div>
+        </div>
+        <div class="qpe">
+          <div class="el">Monthly Rental (incl. GST)</div>
+          <div class="ea">${fI(d.totalRental)}</div>
+          <div class="et">per month for ${t} months</div>
+        </div>
+        <div class="qpr"><span class="ql">Monthly Rental (base)</span><span class="qv">${fI(d.rental)}</span></div>
+        <div class="qpr"><span class="ql">GST on Rental @${ls.gstPct}%</span><span class="qv">${fI(d.rentalGST)}</span></div>
+        <div class="qpr"><span class="ql">Total Rental Outflow</span><span class="qv">${fI(d.totalOutflow)}</span></div>
+        <div class="qpr"><span class="ql">${ls.depLabel} Payment</span><span class="qv">${fI(ls.deposit)}</span></div>
+        <div class="qpr" style="border-top:2px solid #DDE4E7;padding-top:11px;margin-top:4px"><span class="ql" style="font-weight:700;color:#0F1A1E">Total Cost of Ownership</span><span class="qv" style="font-size:15px;color:#1B3A40;font-weight:800">${fI(d.tco)}</span></div>
+        <div class="qpr"><span class="ql" style="font-weight:600">Post-Tax Cost @${(ls.taxRate*100).toFixed(2)}%</span><span class="qv" style="color:#0A7B5A;font-weight:800">${fI(d.postTax)}</span></div>
+      </div>
+      <div class="qpf"><div class="qpd">This quotation is indicative and subject to final approval by the financing partner. Rentals are inclusive of GST at ${ls.gstPct}%. Post-tax cost assumes full deductibility of lease rentals at the stated corporate tax rate. Figures are estimates for discussion purposes only.</div></div>
+    </div>
+    <div class="qpbtns"><button class="btn btn-b" onclick="window.print()">Print / Save as PDF</button><button class="btn btn-o" onclick="closePrint()">Close</button></div>`;
+
+  document.getElementById('printArea').innerHTML=html;
+  document.body.classList.add('printing');
+  window.scrollTo(0,0);
+  setTimeout(function(){window.print();},300);
+}
+
+/* ── Download Lease as formula-linked Excel (SheetJS .xlsx) ── */
+function downloadLeaseExcel(){
+  const ls=S.leaseState;
+  if(!ls){alert('Please open the Rental Model page first.');return;}
+  if(typeof XLSX==='undefined'){
+    const sc=document.createElement('script');
+    sc.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    sc.onload=buildLeaseXLSX;
+    sc.onerror=function(){alert('Could not load the Excel library. Check your internet connection and try again.');};
+    document.head.appendChild(sc);
+  }else buildLeaseXLSX();
+}
+function buildLeaseXLSX(){
+  const ls=S.leaseState;
+  const cu=document.getElementById('xCust').value||'Customer';
+  const prod=(document.getElementById('xProduct')||{}).value||'';
+  const now=new Date();
+  const tenures=ls.tenures;
+  // Column letters for tenure columns start at B
+  const colL=i=>String.fromCharCode(66+i); // B, C, D, ...
+
+  const aoa=[];
+  aoa.push(['Stryker India – Finance Lease Quotation']);
+  aoa.push(['Customer',cu]);
+  if(prod.trim())aoa.push(['Product Details',prod.trim()]);
+  aoa.push(['Date',now.toLocaleDateString('en-IN')]);
+  aoa.push(['Lease Type',ls.modeLabel]);
+  aoa.push([]);
+  // INPUT block (single-value inputs, referenced by formulas)
+  // We'll place key inputs in fixed cells so formulas can reference them.
+  // Row indices (1-based) tracked as we push.
+  const r0=aoa.length; // current length before inputs
+  aoa.push(['Equipment Value (incl. GST)', ls.totalAsset]);      // input  -> cell B{r0+1}
+  aoa.push(['GST Rate (%)', ls.gstPct]);                          // input  -> B{r0+2}
+  aoa.push([ls.depLabel+' (%)', ls.advPctNum]);                   // input  -> B{r0+3}
+  aoa.push(['Corporate Tax (%)', (ls.taxRate*100)]);              // input  -> B{r0+4}
+  const rEquip=r0+1, rGST=r0+2, rDep=r0+3, rTax=r0+4;
+  aoa.push(['Base Asset (ex-GST)', {f:`B${rEquip}/(1+B${rGST}/100)`}]); // B{r0+5}
+  const rBase=r0+5;
+  aoa.push(['Deposit Amount', {f:`B${rEquip}*B${rDep}/100`}]);          // B{r0+6}
+  const rDepAmt=r0+6;
+  aoa.push([]);
+
+  // TABLE header row
+  const hdrRow=aoa.length+1; // 1-based row number of header
+  aoa.push(['Lease Details'].concat(tenures.map(t=>t+' Months')));
+
+  // PTPM row (inputs per tenure)
+  const ptpmRow=aoa.length+1;
+  aoa.push(['PTPM Factor'].concat(tenures.map(t=>ls.leaseData[t].ptpm)));
+
+  // Monthly Rental (base) = Base Asset * PTPM / 1000
+  const rentRow=aoa.length+1;
+  aoa.push(['Monthly Rental (base)'].concat(tenures.map((t,i)=>({f:`$B$${rBase}*${colL(i)}${ptpmRow}/1000`}))));
+
+  // GST on rental = rental * GST%
+  const gstRow=aoa.length+1;
+  aoa.push(['GST on Rental'].concat(tenures.map((t,i)=>({f:`${colL(i)}${rentRow}*$B$${rGST}/100`}))));
+
+  // Total Rental/Month = rental + gst
+  const totRentRow=aoa.length+1;
+  aoa.push(['Total Rental / Month'].concat(tenures.map((t,i)=>({f:`${colL(i)}${rentRow}+${colL(i)}${gstRow}`}))));
+
+  // Total Rental Outflow = total rental * tenure
+  const outflowRow=aoa.length+1;
+  aoa.push(['Total Rental Outflow'].concat(tenures.map((t,i)=>({f:`${colL(i)}${totRentRow}*${t}`}))));
+
+  // TCO = outflow + deposit
+  const tcoRow=aoa.length+1;
+  aoa.push(['Total Cost of Ownership'].concat(tenures.map((t,i)=>({f:`${colL(i)}${outflowRow}+$B$${rDepAmt}`}))));
+
+  // Post-Tax = TCO * (1 - tax%)
+  const ptRow=aoa.length+1;
+  aoa.push(['Post-Tax Cost'].concat(tenures.map((t,i)=>({f:`${colL(i)}${tcoRow}*(1-$B$${rTax}/100)`}))));
+
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  // Column widths
+  ws['!cols']=[{wch:26}].concat(tenures.map(()=>({wch:15})));
+  // Number formats for currency rows (B..)
+  const money='#,##0';
+  const fmtRows=[rEquip,rDepAmt,rBase,rentRow,gstRow,totRentRow,outflowRow,tcoRow,ptRow];
+  const ncols=tenures.length;
+  for(let rr of fmtRows){
+    for(let ci=0;ci<=ncols;ci++){
+      const addr=XLSX.utils.encode_cell({r:rr-1,c:ci});
+      if(ws[addr]&&typeof ws[addr].v==='number'){ws[addr].z=money;}
+      if(ws[addr]&&ws[addr].f){ws[addr].z=money;}
+    }
+  }
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Lease Quote');
+  const fname=`Lease_Quote_${cu.replace(/\s+/g,'_')}_${ls.modeLabel.replace(/\s+/g,'')}.xlsx`;
+  XLSX.writeFile(wb,fname);
 }
 
 document.addEventListener('DOMContentLoaded',function(){
