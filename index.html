@@ -835,9 +835,35 @@ function fI(n){if(n==null||isNaN(n))return'–';const x=Math.round(n),ng=x<0,s=M
 function fN(n){return fI(n).replace(/₹/,'')}
 function fP(n){return n!=null?n.toFixed(2)+'%':'–'}
 function fD(d){return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}
+/* Reformat a numeric input with Indian commas, keeping cursor near the end intuitively */
+function commafyInput(el){
+  const raw=el.value.replace(/[^0-9]/g,'');
+  if(raw===''){el.value='';return 0;}
+  const num=parseInt(raw,10);
+  const formatted=fN(num); // Indian-grouped, no ₹
+  // Count digits to the left of caret to restore position after reformat
+  const caret=el.selectionStart||el.value.length;
+  const digitsBeforeCaret=el.value.slice(0,caret).replace(/[^0-9]/g,'').length;
+  el.value=formatted;
+  // Find new caret position: walk formatted string counting digits
+  let seen=0,newPos=formatted.length;
+  for(let i=0;i<formatted.length;i++){
+    if(/[0-9]/.test(formatted[i]))seen++;
+    if(seen===digitsBeforeCaret){newPos=i+1;break;}
+  }
+  try{el.setSelectionRange(newPos,newPos);}catch(e){}
+  return num;
+}
 function esc(v){return String(v||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]}).replace(/\n/g,'<br>')}
 
-function init(){renderPills();bind();syncAdvDisplay();calc();document.getElementById('xInvH').textContent=fI(S.inv)}
+function init(){
+  renderPills();bind();
+  // Format initial input values with Indian commas
+  const xi=document.getElementById('xInv');if(xi)xi.value=fN(S.inv);
+  const xa=document.getElementById('xAdv');if(xa&&S.advMode==='abs')xa.value=fN(Math.round(S.inv*S.advPct/100));
+  syncAdvDisplay();calc();
+  document.getElementById('xInvH').textContent=fI(S.inv);
+}
 
 function renderPills(){
   document.getElementById('tGrid').innerHTML=CFG.tenures.map(t=>
@@ -860,6 +886,7 @@ function setPage(p){
     if(leaseInvEl)leaseInvEl.value=Math.round(S.inv);
     calcLease();
   }
+  if(p==='int'||p==='ext')renderCmp(); // refresh header label for customer vs internal view
 }
 
 /* ── Advance Mode Toggle (₹ vs %) ── */
@@ -873,7 +900,7 @@ function setAdvMode(mode){
   if(mode==='abs'){
     pre.style.display='';suf.style.display='none';
     inp.classList.add('hp');inp.classList.remove('hs');
-    inp.value=Math.round(S.inv*S.advPct/100);
+    inp.value=fN(Math.round(S.inv*S.advPct/100));
     inp.style.paddingLeft='28px';inp.style.paddingRight='14px';
   }else{
     pre.style.display='none';suf.style.display='';
@@ -897,7 +924,7 @@ function syncAdvDisplay(){
 
 function bind(){
   document.getElementById('xInv').addEventListener('input',function(){
-    S.inv=parseFloat(this.value.replace(/[^0-9]/g,''))||0;
+    S.inv=commafyInput(this);
     document.getElementById('xInvH').textContent=S.inv>0?fI(S.inv):'';
     if(S.advMode==='abs'){
       // recalc % from absolute
@@ -910,7 +937,7 @@ function bind(){
     if(S.advMode==='pct'){
       S.advPct=parseFloat(this.value)||0;
     }else{
-      const absVal=parseFloat(this.value.replace(/[^0-9]/g,''))||0;
+      const absVal=commafyInput(this);
       S.advPct=S.inv>0?(absVal/S.inv*100):0;
     }
     syncAdvDisplay();calc();
@@ -1091,7 +1118,9 @@ function renderLLC(r){
 
 function renderCmp(){
   const all=C.runAll(S.inv,S.advPct,S.budget,S.prog);const showS=S.prog==='subv';
-  let h=`<thead><tr><th style="text-align:left">${showS?'With Subvention':'No Subvention'}</th>`;
+  const isCust=S.curPage==='ext';
+  const hdrLabel=isCust?'Tenure':(showS?'With Subvention':'No Subvention');
+  let h=`<thead><tr><th style="text-align:left">${hdrLabel}</th>`;
   all.forEach(r=>h+=`<th class="${r.tenure===S.tenure?'co':''}">${r.tenure}M</th>`);
   h+=`</tr></thead><tbody>`;
   [['Invoice','inv',fI],['Advance','adv',fI],['Finance Amt','fin',fI],
