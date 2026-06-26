@@ -500,8 +500,10 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 #printArea{display:none}
 body.printing #printArea{display:block}
 @media print{
+  @page{margin:0;size:auto}
+  html,body{margin:0!important;padding:0!important}
   body.printing>*:not(#printArea){display:none!important}
-  body.printing #printArea{display:block!important}
+  body.printing #printArea{display:block!important;padding:14mm 12mm}
   body.printing #printArea *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
 }
 /* Quote print styles (shared by loan + lease quotes) */
