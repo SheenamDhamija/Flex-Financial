@@ -657,7 +657,7 @@ body.printing #printArea{display:block}
       <div class="tpn" id="t-sch"><div style="max-height:500px;overflow-y:auto"><table class="st" id="schT"></table></div></div>
       <div class="tpn" id="t-llc"><div class="cd-b" id="llcContent"></div></div>
       <div class="tpn" id="t-pv"><div class="cd-b"><div class="pw" id="pvW"></div><div style="margin-top:14px" class="btng"><button class="btn btn-b" onclick="printQuote()">📄 Save / Print Quote</button></div></div></div>
-      <div class="tpn" id="t-doc"><div class="cd-b"><div class="doc-section" style="margin-top:0;border-top:none;padding-top:0"><div class="doc-hdr"><div class="doc-title">Required Documents</div><span class="doc-qual" id="docQual"></span></div><div class="doc-entity-sel"><select id="docEntity" onchange="renderDocs()"><option value="individual">Individual / Proprietorship</option><option value="partnership">Partnership Firm</option><option value="pvtltd">Pvt Ltd / LLP</option></select></div><ul class="doc-list" id="docList"></ul><div class="doc-note" id="docNote"></div></div></div></div>
+      <div class="tpn" id="t-doc"><div class="cd-b"><div class="doc-section" style="margin-top:0;border-top:none;padding-top:0"><div class="doc-hdr"><div class="doc-title">Required Documents</div><span class="doc-qual" id="docQual"></span></div><div class="doc-entity-sel"><select id="docEntity" onchange="renderDocs()"><option value="individual">Individual Doctor Loan</option><option value="proprietorship">Proprietorship Firm</option><option value="partnership">Partnership Firm</option><option value="pvtltd">Pvt Ltd Firm</option></select></div><ul class="doc-list" id="docList"></ul><div class="doc-note" id="docNote"></div></div></div></div>
     </div>
   </div>
 </div>
@@ -782,9 +782,10 @@ const CFG={
     disc:"This quotation is indicative and subject to final credit approval by the financing partner."}
 };
 const DOC_REQS={
-  individual:["Pan Card – Individual","Aadhaar Card","Residence Proof","Hospital Registration Certificate","Equipment Location Proof","Medical Degree Certificate (MBBS/BDS/MD etc.)"],
-  partnership:["Pan Card – Company & Partners","Aadhaar Card – Partners","Company Address Proof","Hospital Registration Certificate","Equipment Location Proof","Partnership Deed & List of Partners","Guarantee of the Doctor Partner"],
-  pvtltd:["Pan Card – Company & Directors","Aadhaar Card – Directors","Company Address Proof","Hospital Registration Certificate","Equipment Location Proof","MOA/AOA & List of Shareholders","Guarantee of the Doctor Director"],
+  individual:["Aadhaar Card & PAN Card","Doctor Degree","Doctor Registration Certificate","Email ID & Phone Number"],
+  proprietorship:["Aadhaar Card & PAN Card","Doctor Degree","Doctor Registration Certificate","Email ID & Phone Number","Two Firm Registration Proofs"],
+  partnership:["Aadhaar Card & PAN Card of all Partners","Doctor Degree","Doctor Registration Certificate","Email ID & Phone Number","Firm KYC (Deed, PAN, any two Firm Registration Proofs)"],
+  pvtltd:["Aadhaar Card & PAN Card of all Directors","Doctor Degree","Doctor Registration Certificate","Email ID & Phone Number","Company KYC (PAN, COI, AOA, MOA, any other Firm Registration Proof)"],
 };
 
 const C={
