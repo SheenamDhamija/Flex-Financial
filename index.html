@@ -156,7 +156,7 @@ input[type=number]{-moz-appearance:textfield}
 .llc-tax-suf{font-size:11px;color:var(--ink4);font-weight:500}
 
 .llc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-@media(max-width:640px){.llc-grid{grid-template-columns:1fr;gap:10px}}
+@media screen and (max-width:640px){.llc-grid{grid-template-columns:1fr;gap:10px}}
 .llc-card{border-radius:var(--rs);border:1.5px solid var(--bd);overflow:hidden}
 .llc-card.loan{border-color:var(--teal-border)}
 .llc-card.lease{border-color:var(--gold-border)}
@@ -287,13 +287,13 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 .tl-seg.s2{background:linear-gradient(135deg,var(--teal-light),var(--teal))}
 
 /* ═══ TABLET ═══ */
-@media(max-width:1024px){
+@media screen and (max-width:1024px){
   .wrap{grid-template-columns:1fr;padding:16px;gap:16px}
   .dlr-card-b{padding:4px 20px 20px}
 }
 
 /* ═══ MOBILE ═══ */
-@media(max-width:640px){
+@media screen and (max-width:640px){
   /* ── Header ── */
   .hdr{padding:0 10px;height:48px;gap:6px}
   .hdr-logo{height:22px}
@@ -465,7 +465,7 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 }
 
 /* ═══ VERY SMALL SCREENS (iPhone SE, etc.) ═══ */
-@media(max-width:375px){
+@media screen and (max-width:375px){
   .hdr{padding:0 8px}
   .hdr-logo{height:18px}
   .stryker-text{display:none}
@@ -500,11 +500,16 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 #printArea{display:none}
 body.printing #printArea{display:block}
 @media print{
-  @page{margin:0;size:auto}
-  html,body{margin:0!important;padding:0!important}
+  @page{margin:0;size:A4 portrait}
+  html,body{margin:0!important;padding:0!important;width:auto!important;min-width:0!important;background:#fff!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
   body.printing>*:not(#printArea){display:none!important}
-  body.printing #printArea{display:block!important;padding:14mm 12mm}
-  body.printing #printArea *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body.printing #printArea{display:block!important;padding:12mm 10mm;width:190mm;max-width:190mm;margin:0 auto;font-size:12px}
+  body.printing #printArea *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;float:none!important}
+  /* Keep the quote card intact across page breaks where possible */
+  body.printing #printArea .qpw,body.printing #printArea .pw{break-inside:auto;page-break-inside:auto;box-shadow:none!important;width:100%!important;max-width:100%!important}
+  body.printing #printArea .qpe,body.printing #printArea .pve{break-inside:avoid;page-break-inside:avoid}
+  body.printing #printArea table{break-inside:auto;page-break-inside:auto;width:100%!important}
+  body.printing #printArea tr{break-inside:avoid;page-break-inside:avoid}
 }
 /* Quote print styles (shared by loan + lease quotes) */
 #printArea .qpw{max-width:760px;margin:0 auto;border:2px solid #DDE4E7;border-radius:10px;overflow:hidden;font-family:var(--f);color:#0F1A1E}
@@ -581,16 +586,16 @@ body.printing #printArea{display:block}
           <label class="fl">Advance Payment (to Stryker)</label>
           <div class="adv-row">
             <div class="iw" style="flex:1">
-              <span class="ip" id="advPre">₹</span>
-              <input type="text" id="xAdv" class="fi hp" value="670000" inputmode="numeric">
-              <span class="is" id="advSuf" style="display:none">%</span>
+              <span class="ip" id="advPre" style="display:none">₹</span>
+              <input type="text" id="xAdv" class="fi hs" value="20" inputmode="decimal" style="padding-left:14px;padding-right:42px">
+              <span class="is" id="advSuf">%</span>
             </div>
             <div class="adv-mode-toggle">
-              <button class="adv-mode-btn on" id="advModeAbs" onclick="setAdvMode('abs')">₹</button>
-              <button class="adv-mode-btn" id="advModePct" onclick="setAdvMode('pct')">%</button>
+              <button class="adv-mode-btn" id="advModeAbs" onclick="setAdvMode('abs')">₹</button>
+              <button class="adv-mode-btn on" id="advModePct" onclick="setAdvMode('pct')">%</button>
             </div>
           </div>
-          <div class="fh" id="xAdvH">= 20.00% of invoice</div>
+          <div class="fh" id="xAdvH">= ₹6,70,000</div>
         </div>
         <div class="hr"></div>
         <div class="fg io">
@@ -832,7 +837,7 @@ const C={
   isDoctorLoan(fin){return fin<=CFG.doctorLoanLimit}
 };
 
-const S={prog:'subv',tenure:CFG.defTenure,inv:3350000,advPct:20,budget:6.5,curPage:'int',advMode:'abs',customValid:null,taxRate:0.2517,productDetails:''};
+const S={prog:'subv',tenure:CFG.defTenure,inv:3350000,advPct:20,budget:6.5,curPage:'int',advMode:'pct',customValid:null,taxRate:0.2517,productDetails:''};
 
 function fI(n){if(n==null||isNaN(n))return'–';const x=Math.round(n),ng=x<0,s=Math.abs(x).toString();if(s.length<=3)return(ng?'−':'')+'₹'+s;return(ng?'−':'')+'₹'+s.slice(0,-3).replace(/\B(?=(\d{2})+(?!\d))/g,',')+','+s.slice(-3)}
 function fN(n){return fI(n).replace(/₹/,'')}
@@ -863,7 +868,8 @@ function init(){
   renderPills();bind();
   // Format initial input values with Indian commas
   const xi=document.getElementById('xInv');if(xi)xi.value=fN(S.inv);
-  const xa=document.getElementById('xAdv');if(xa&&S.advMode==='abs')xa.value=fN(Math.round(S.inv*S.advPct/100));
+  const xa=document.getElementById('xAdv');
+  if(xa){xa.value=(S.advMode==='abs')?fN(Math.round(S.inv*S.advPct/100)):String(S.advPct);}
   syncAdvDisplay();calc();
   document.getElementById('xInvH').textContent=fI(S.inv);
 }
@@ -1237,10 +1243,10 @@ window.addEventListener('afterprint',function(){
 
 /* ═══ LEASE CALCULATOR ═══ */
 const PTPM_TABLES={
-  advance_20: {12:71.11, 24:37.71, 36:26.59, 48:21.10, 60:17.80},
-  advance_10: {12:80.00, 24:42.50, 36:30.00, 48:23.90, 60:20.00},
-  residual_20:{12:72.00, 24:38.60, 36:27.50}, // Only 3 tenures available
-  residual_10:{12:81.00, 24:43.40, 36:30.95, 48:24.75, 60:21.05},
+  advance_20: {12:71.00, 24:37.50, 36:26.50, 48:21.00, 60:17.50},
+  advance_10: {12:80.00, 24:42.50, 36:30.00, 48:23.50, 60:20.00},
+  residual_20:{12:72.00, 24:39.00, 36:28.00}, // Only 3 tenures available
+  residual_10:{12:80.50, 24:43.00, 36:30.50, 48:24.25, 60:20.75},
 };
 function getPTPMTable(){
   const mode=document.getElementById('leaseMode')?document.getElementById('leaseMode').value:'advance';
