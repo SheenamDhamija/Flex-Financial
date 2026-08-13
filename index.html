@@ -496,59 +496,12 @@ body.ext .valid-edit:hover{color:inherit;background:transparent}
 
 /* ═══ PRINT ═══ */
 @media print{.np{display:none!important}body{background:#fff}.hdr{position:static}.wrap{display:block;max-width:100%}}
-/* In-page print: when a quote is staged, hide everything except #printArea */
-#printArea{display:none}
-body.printing #printArea{display:block}
-@media print{
-  @page{margin:0;size:A4 portrait}
-  html,body{margin:0!important;padding:0!important;width:auto!important;min-width:0!important;background:#fff!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
-  body.printing>*:not(#printArea){display:none!important}
-  body.printing #printArea{display:block!important;padding:12mm 10mm;width:190mm;max-width:190mm;margin:0 auto;font-size:12px}
-  body.printing #printArea *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;float:none!important}
-  /* Keep the quote card intact across page breaks where possible */
-  body.printing #printArea .qpw,body.printing #printArea .pw{break-inside:auto;page-break-inside:auto;box-shadow:none!important;width:100%!important;max-width:100%!important}
-  body.printing #printArea .qpe,body.printing #printArea .pve{break-inside:avoid;page-break-inside:avoid}
-  body.printing #printArea table{break-inside:auto;page-break-inside:auto;width:100%!important}
-  body.printing #printArea tr{break-inside:avoid;page-break-inside:avoid}
-}
-/* Quote print styles (shared by loan + lease quotes) */
-#printArea .qpw{max-width:760px;margin:0 auto;border:2px solid #DDE4E7;border-radius:10px;overflow:hidden;font-family:var(--f);color:#0F1A1E}
-#printArea .qph{background:linear-gradient(135deg,#0a1628,#142d54);color:#fff;padding:30px 28px;text-align:center;position:relative}
-#printArea .qph h3{font-family:var(--fd);font-size:26px;font-weight:600;letter-spacing:.5px}
-#printArea .qph .ps{font-size:11px;opacity:.55;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
-#printArea .qph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C9952D,#E8C966,#C9952D,transparent);opacity:.6}
-#printArea .qpb{padding:26px 28px}
-#printArea .qpcust{margin-bottom:16px}
-#printArea .qpcust .cl{font-size:9px;color:#8DA0A8;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:3px}
-#printArea .qpcust .cn{font-family:var(--fd);font-size:21px;font-weight:600;color:#0F1A1E}
-#printArea .qpcust .cd{font-size:11px;color:#8DA0A8;margin-top:3px;font-weight:500}
-#printArea .qpr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EFF2F3;gap:12px}
-#printArea .qpr .ql{color:#5A6F76;font-size:13px;font-weight:500}
-#printArea .qpr .qv{font-family:var(--m);font-weight:600;font-size:13px;color:#0F1A1E;text-align:right}
-#printArea .qpcfg{background:#f6f1fb;border:1px solid #e4d4f2;border-radius:8px;padding:14px 16px;margin:18px 0;display:flex;flex-wrap:wrap;gap:16px}
-#printArea .qpcfg .ci{font-size:12px}
-#printArea .qpcfg .ci b{display:block;font-size:10px;color:#8B5CF6;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;font-weight:700}
-#printArea .qpe{background:linear-gradient(135deg,#EDF4F5,#e0eff2);border:2px solid #C5DDE2;border-radius:10px;padding:20px;text-align:center;margin:20px 0}
-#printArea .qpe .el{font-size:10px;color:#3A7A8A;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-#printArea .qpe .ea{font-family:var(--m);font-size:28px;font-weight:800;color:#1B3A40;letter-spacing:-1px}
-#printArea .qpe .et{font-size:13px;color:#5A6F76;margin-top:4px;font-weight:500}
-#printArea .qpz{display:inline-block;background:#0A7B5A;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:14px;margin-top:6px}
-#printArea table.qpt{width:100%;border-collapse:collapse;margin:18px 0;font-size:12px}
-#printArea table.qpt th,#printArea table.qpt td{padding:9px 10px;text-align:center;border-bottom:1px solid #EFF2F3}
-#printArea table.qpt th{background:#f3e8ff;color:#6b21a8;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-#printArea table.qpt td{font-family:var(--m);font-weight:500}
-#printArea table.qpt .lc{text-align:left;font-family:var(--f);font-weight:600;color:#2D3F45}
-#printArea table.qpt tr.hl td{background:#EDF4F5;font-weight:800;color:#1B3A40}
-#printArea .qpf{background:#F8FAFB;padding:18px 28px;border-top:1px solid #DDE4E7}
-#printArea .qpd{font-size:10px;color:#8DA0A8;line-height:1.7}
-#printArea .qpbtns{max-width:760px;margin:16px auto;display:flex;gap:8px}
-@media print{#printArea .qpbtns{display:none!important}}
+/* Print: hide UI chrome when the page itself is printed (quotes print via hidden iframe) */
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .cd{animation:fadeUp .4s ease-out both}.rcol .cd{animation-delay:.1s}
 </style>
 </head>
 <body>
-<div id="printArea"></div>
 
 <header class="hdr np">
   <div class="hdr-left">
@@ -1221,25 +1174,95 @@ function oTab(id,btn){
   document.getElementById('t-'+id).classList.add('on');
 }
 
+/* ── Shared print engine: renders a standalone doc in a hidden iframe and prints it ── */
+function PRINT_CSS(){return `
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff;color:#0F1A1E;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@page{margin:10mm;size:A4 portrait}
+.sheet{width:190mm;max-width:190mm;margin:0 auto;padding:0}
+.pw{background:#fff;border:2px solid #DDE4E7;border-radius:10px;overflow:hidden}
+.pvh{background:linear-gradient(135deg,#0a1628 0%,#16324a 50%,#1B3A40 100%);color:#fff;padding:26px 24px;text-align:center;position:relative}
+.pvh h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;font-weight:600;letter-spacing:.4px}
+.pvh .ps{font-size:10px;opacity:.55;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
+.pvb{padding:22px 24px}
+.pvr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EFF2F3;gap:10px}
+.pvr:last-child{border-bottom:none}
+.pvr .pl{color:#5A6F76;font-size:12.5px;font-weight:500}
+.pvr .pv{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:600;font-size:12.5px;color:#0F1A1E;text-align:right}
+.pve{background:linear-gradient(135deg,#EDF4F5,#e0eff2);border:2px solid #C5DDE2;border-radius:10px;padding:18px;text-align:center;margin:18px 0;page-break-inside:avoid;break-inside:avoid}
+.pve .el{font-size:9.5px;color:#3A7A8A;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.pve .ea{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:26px;font-weight:800;color:#1B3A40;letter-spacing:-1px}
+.pve .et{font-size:12px;color:#5A6F76;margin-top:4px;font-weight:500}
+.pzb{display:inline-block;background:#0A7B5A;color:#fff;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:14px;margin-top:6px}
+.pvf{background:#F8FAFB;padding:16px 24px;border-top:1px solid #DDE4E7}
+.pvd{font-size:9.5px;color:#8DA0A8;line-height:1.65}
+.valid-edit{border-bottom:none!important;cursor:default!important;text-decoration:none!important}
+.qpw{border:2px solid #DDE4E7;border-radius:10px;overflow:hidden}
+.qph{background:linear-gradient(135deg,#0a1628,#142d54);color:#fff;padding:26px 24px;text-align:center}
+.qph h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;font-weight:600;letter-spacing:.4px}
+.qph .ps{font-size:10px;opacity:.55;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
+.qpb{padding:22px 24px}
+.qpcust{margin-bottom:14px}
+.qpcust .cl{font-size:9px;color:#8DA0A8;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:3px}
+.qpcust .cn{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:600;color:#0F1A1E}
+.qpcust .cd{font-size:10.5px;color:#8DA0A8;margin-top:3px;font-weight:500}
+.qpr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #EFF2F3;gap:10px}
+.qpr .ql{color:#5A6F76;font-size:12.5px;font-weight:500}
+.qpr .qv{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:600;font-size:12.5px;color:#0F1A1E;text-align:right}
+.qpcfg{background:#f6f1fb;border:1px solid #e4d4f2;border-radius:8px;padding:13px 15px;margin:16px 0;display:flex;flex-wrap:wrap;gap:14px;page-break-inside:avoid;break-inside:avoid}
+.qpcfg .ci{font-size:11.5px}
+.qpcfg .ci b{display:block;font-size:9.5px;color:#8B5CF6;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;font-weight:700}
+.qpe{background:linear-gradient(135deg,#EDF4F5,#e0eff2);border:2px solid #C5DDE2;border-radius:10px;padding:18px;text-align:center;margin:18px 0;page-break-inside:avoid;break-inside:avoid}
+.qpe .el{font-size:9.5px;color:#3A7A8A;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.qpe .ea{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:26px;font-weight:800;color:#1B3A40;letter-spacing:-1px}
+.qpe .et{font-size:12px;color:#5A6F76;margin-top:4px;font-weight:500}
+.qpf{background:#F8FAFB;padding:16px 24px;border-top:1px solid #DDE4E7}
+.qpd{font-size:9.5px;color:#8DA0A8;line-height:1.65}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:11.5px}
+th,td{padding:8px 9px;text-align:center;border-bottom:1px solid #EFF2F3}
+th{background:#f3e8ff;color:#6b21a8;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+td{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500}
+.lc{text-align:left!important;font-family:'Plus Jakarta Sans',sans-serif!important;font-weight:600;color:#2D3F45}
+tr{page-break-inside:avoid;break-inside:avoid}
+tr.hl td{background:#EDF4F5;font-weight:800;color:#1B3A40}
+`}
+
+function printViaIframe(innerHTML,title){
+  // Remove any previous print frame
+  const old=document.getElementById('__printFrame');
+  if(old)old.parentNode.removeChild(old);
+  const f=document.createElement('iframe');
+  f.id='__printFrame';
+  f.setAttribute('aria-hidden','true');
+  f.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0;pointer-events:none';
+  document.body.appendChild(f);
+  const doc=f.contentWindow.document;
+  doc.open();
+  doc.write('<!DOCTYPE html><html><head><meta charset="UTF-8">'+
+    '<title>'+(title||'Quote')+'</title>'+
+    '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">'+
+    '<style>'+PRINT_CSS()+'</style></head><body><div class="sheet">'+innerHTML+'</div></body></html>');
+  doc.close();
+  const go=function(){
+    try{
+      f.contentWindow.focus();
+      f.contentWindow.print();
+    }catch(e){
+      alert('Could not open the print dialog. Please try again.');
+    }
+    setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); },60000);
+  };
+  // Wait for fonts/layout inside the frame
+  if(f.contentWindow.document.readyState==='complete')setTimeout(go,400);
+  else f.onload=function(){setTimeout(go,400);};
+}
+
 function printQuote(){
-  // Loan quote — renders the currently-selected tenure into #printArea, then prints in-page
+  // Loan quote – prints only the currently-selected tenure
   oTab('pv',document.querySelectorAll('.tb')[3]);
   const quoteHTML=document.getElementById('pvW').innerHTML;
-  const pa=document.getElementById('printArea');
-  pa.innerHTML='<div class="pw" style="max-width:680px;margin:0 auto">'+quoteHTML+'</div>'+
-    '<div class="qpbtns"><button class="btn btn-b" onclick="window.print()">Print / Save as PDF</button>'+
-    '<button class="btn btn-o" onclick="closePrint()">Close</button></div>';
-  document.body.classList.add('printing');
-  window.scrollTo(0,0);
-  setTimeout(function(){window.print();},300);
+  printViaIframe('<div class="pw">'+quoteHTML+'</div>','Financing Quote');
 }
-function closePrint(){
-  document.body.classList.remove('printing');
-  document.getElementById('printArea').innerHTML='';
-}
-window.addEventListener('afterprint',function(){
-  document.body.classList.remove('printing');
-});
 
 /* ═══ LEASE CALCULATOR ═══ */
 const PTPM_TABLES={
@@ -1418,7 +1441,6 @@ function calcLease(){
 function printLeaseQuote(){
   const ls=S.leaseState;
   if(!ls){alert('Please open the Rental Model page first.');return;}
-  // Use the tenure selected on page 1 (S.tenure); fall back to first available
   let t=S.tenure;
   if(!ls.leaseData[t]){t=ls.tenures[0];}
   const d=ls.leaseData[t];
@@ -1427,47 +1449,34 @@ function printLeaseQuote(){
   const prod=(document.getElementById('xProduct')||{}).value||'';
   const now=new Date();
   const fmtD=x=>x.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-  const prodHTML=prod.trim()?`<div class="qpr"><span class="ql">Product Details</span><span class="qv">${prod.trim().replace(/</g,'&lt;')}</span></div>`:'';
+  const prodHTML=prod.trim()?'<div class="qpr"><span class="ql">Product Details</span><span class="qv">'+prod.trim().replace(/</g,'&lt;')+'</span></div>':'';
 
-  const html=`
-    <div class="qpw">
-      <div class="qph"><h3>Stryker India</h3><div class="ps">Finance Lease – Rental Quotation</div></div>
-      <div class="qpb">
-        <div class="qpcust">
-          <div class="cl">Lease Quotation For</div>
-          <div class="cn">${cu}</div>
-          <div class="cd">${fmtD(now)}</div>
-        </div>
-        ${prodHTML}
-        <div class="qpr"><span class="ql">Equipment Value (incl. taxes)</span><span class="qv">${fI(ls.totalAsset)}</span></div>
-        <div class="qpr"><span class="ql">Base Asset (ex-GST)</span><span class="qv">${fI(ls.baseAsset)}</span></div>
-        <div class="qpcfg">
-          <div class="ci"><b>Lease Type</b>${ls.modeLabel}</div>
-          <div class="ci"><b>${ls.depLabel} %</b>${ls.advPctNum}%</div>
-          <div class="ci"><b>${ls.depLabel} Amount</b>${fI(ls.deposit)}</div>
-          <div class="ci"><b>Tenure</b>${t} Months</div>
-          <div class="ci"><b>Corporate Tax</b>${(ls.taxRate*100).toFixed(2)}%</div>
-        </div>
-        <div class="qpe">
-          <div class="el">Monthly Rental (incl. GST)</div>
-          <div class="ea">${fI(d.totalRental)}</div>
-          <div class="et">per month for ${t} months</div>
-        </div>
-        <div class="qpr"><span class="ql">Monthly Rental (base)</span><span class="qv">${fI(d.rental)}</span></div>
-        <div class="qpr"><span class="ql">GST on Rental @${ls.gstPct}%</span><span class="qv">${fI(d.rentalGST)}</span></div>
-        <div class="qpr"><span class="ql">Total Rental Outflow</span><span class="qv">${fI(d.totalOutflow)}</span></div>
-        <div class="qpr"><span class="ql">${ls.depLabel} Payment</span><span class="qv">${fI(ls.deposit)}</span></div>
-        <div class="qpr" style="border-top:2px solid #DDE4E7;padding-top:11px;margin-top:4px"><span class="ql" style="font-weight:700;color:#0F1A1E">Total Cost of Ownership</span><span class="qv" style="font-size:15px;color:#1B3A40;font-weight:800">${fI(d.tco)}</span></div>
-        <div class="qpr"><span class="ql" style="font-weight:600">Post-Tax Cost @${(ls.taxRate*100).toFixed(2)}%</span><span class="qv" style="color:#0A7B5A;font-weight:800">${fI(d.postTax)}</span></div>
-      </div>
-      <div class="qpf"><div class="qpd">This quotation is indicative and subject to final approval by the financing partner. Rentals are inclusive of GST at ${ls.gstPct}%. Post-tax cost assumes full deductibility of lease rentals at the stated corporate tax rate. Figures are estimates for discussion purposes only.</div></div>
-    </div>
-    <div class="qpbtns"><button class="btn btn-b" onclick="window.print()">Print / Save as PDF</button><button class="btn btn-o" onclick="closePrint()">Close</button></div>`;
+  const html='<div class="qpw">'+
+    '<div class="qph"><h3>Stryker India</h3><div class="ps">Finance Lease – Rental Quotation</div></div>'+
+    '<div class="qpb">'+
+      '<div class="qpcust"><div class="cl">Lease Quotation For</div><div class="cn">'+cu+'</div><div class="cd">'+fmtD(now)+'</div></div>'+
+      prodHTML+
+      '<div class="qpr"><span class="ql">Equipment Value (incl. taxes)</span><span class="qv">'+fI(ls.totalAsset)+'</span></div>'+
+      '<div class="qpr"><span class="ql">Base Asset (ex-GST)</span><span class="qv">'+fI(ls.baseAsset)+'</span></div>'+
+      '<div class="qpcfg">'+
+        '<div class="ci"><b>Lease Type</b>'+ls.modeLabel+'</div>'+
+        '<div class="ci"><b>'+ls.depLabel+' %</b>'+ls.advPctNum+'%</div>'+
+        '<div class="ci"><b>'+ls.depLabel+' Amount</b>'+fI(ls.deposit)+'</div>'+
+        '<div class="ci"><b>Tenure</b>'+t+' Months</div>'+
+        '<div class="ci"><b>Corporate Tax</b>'+(ls.taxRate*100).toFixed(2)+'%</div>'+
+      '</div>'+
+      '<div class="qpe"><div class="el">Monthly Rental (incl. GST)</div><div class="ea">'+fI(d.totalRental)+'</div><div class="et">per month for '+t+' months</div></div>'+
+      '<div class="qpr"><span class="ql">Monthly Rental (base)</span><span class="qv">'+fI(d.rental)+'</span></div>'+
+      '<div class="qpr"><span class="ql">GST on Rental @'+ls.gstPct+'%</span><span class="qv">'+fI(d.rentalGST)+'</span></div>'+
+      '<div class="qpr"><span class="ql">Total Rental Outflow</span><span class="qv">'+fI(d.totalOutflow)+'</span></div>'+
+      '<div class="qpr"><span class="ql">'+ls.depLabel+' Payment</span><span class="qv">'+fI(ls.deposit)+'</span></div>'+
+      '<div class="qpr" style="border-top:2px solid #DDE4E7;padding-top:11px;margin-top:4px"><span class="ql" style="font-weight:700;color:#0F1A1E">Total Cost of Ownership</span><span class="qv" style="font-size:14.5px;color:#1B3A40;font-weight:800">'+fI(d.tco)+'</span></div>'+
+      '<div class="qpr"><span class="ql" style="font-weight:600">Post-Tax Cost @'+(ls.taxRate*100).toFixed(2)+'%</span><span class="qv" style="color:#0A7B5A;font-weight:800">'+fI(d.postTax)+'</span></div>'+
+    '</div>'+
+    '<div class="qpf"><div class="qpd">This quotation is indicative and subject to final approval by the financing partner. Rentals are inclusive of GST at '+ls.gstPct+'%. Post-tax cost assumes full deductibility of lease rentals at the stated corporate tax rate. Figures are estimates for discussion purposes only.</div></div>'+
+  '</div>';
 
-  document.getElementById('printArea').innerHTML=html;
-  document.body.classList.add('printing');
-  window.scrollTo(0,0);
-  setTimeout(function(){window.print();},300);
+  printViaIframe(html,'Lease Quote');
 }
 
 /* ── Download Lease as formula-linked Excel (SheetJS .xlsx) ── */
